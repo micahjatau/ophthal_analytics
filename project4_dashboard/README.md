@@ -164,17 +164,17 @@ success_1yr_30pct = if_else(
 Medication fields are free text:
 
 	- Pre-Op medication:
-
+	
 		- "n/a" means unknown or not recorded.
-
+		
 	- Current medication:
-
+	
 		- "nil" means no current glaucoma drops.
 
 Two helper functions reduce these to:
 
 	- meds_preop_any – 1 if on any pre operative medication, 0 if known to be on none, NA if unknown.
-
+	
 	- meds_current_any – 1 if on medication at last follow up, 0 if explicitly off, NA if unclear.
 
 An indicator med_free_last is 1 where the patient is recorded as off treatment at last follow up.
