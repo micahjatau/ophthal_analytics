@@ -1,0 +1,34 @@
+Patient_ID,Sex,Age,Eye,surgery_clean,surgery_date,first_visit_date,last_visit_date,Pre-Op medication,Current medication,va_preop_logmar,va_1dpo_logmar,va_6mo_logmar,va_1yr_logmar,iop_preop,iop_1dpo,iop_6mo,iop_1yr
+PX001,F,35,RE,RICCE + Trab,2022-08-02,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+PX002,F,80,RE,RICCE + Trab,2022-09-13,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+PX003,M,45,RE,Trab + SICS,2022-11-29,2022-11-28,NA,"IV Mannitol, Diamox",NA,2,2,NA,NA,30,NA,NA,NA
+PX004,f,75,LE,Trab + SICS,2022-12-13,2016-09-28,2024-07-02,misopt,hypromellose,1.78,0.18,1.78,1.78,11,2,6,9
+PX005,F,62,RE,Trab + SICS,2023-01-17,2021-09-30,2025-07-30,"misopt, micropost, pilocarpine",brimonidine and dorzolamide/timolol,1,0.78,0.78,1.18,32,12,55,33
+PX006,F,48,RE,Trab + SICS,2023-01-17,NA,NA,NA,nil,2,1,NA,NA,NA,NA,NA,NA
+PX007,M,56,RE,Trabeculectomy,2023-02-28,NA,NA,NA,nil,NA,NA,1.08,NA,NA,NA,10,NA
+PX008,M,56,LE,Trabeculectomy,2023-03-14,NA,2023-11-13,NA,nil,NA,NA,0.18,NA,NA,NA,11,NA
+PX009,M,56,RE,Trab + SICS,2023-03-21,2022-08-15,NA,misopt,"misopt, micropost and brimonidine",0.6,0.3,0.3,NA,12,6,13.7,NA
+PX010,F,54,RE,Trabeculectomy,2023-04-20,2018-09-04,2025-08-21,misopt and micropost,"misopt, micropost and brimonidine",0.3,1.78,0.48,0.78,36,17,10,36
+PX011,M,58,LE,Trab + SICS,2023-08-01,2023-07-20,2024-08-07,xalamol,timolol,1.78,0.18,NA,0.18,16,10,NA,16
+PX012,M,62,RE,Trabeculectomy,2023-08-09,2023-07-17,2024-04-29,misopt,nil,0.48,NA,0.3,NA,28.9,10.3,6,NA
+PX013,M,62,LE,Trabeculectomy,2023-08-22,2023-07-17,2024-04-29,misopt,nil,0.3,NA,0.18,NA,28.9,12,6,NA
+PX014,M,41,RE,Trabeculectomy,2023-09-19,2023-09-04,2025-04-02,misopt,misopt and micropost,0,NA,0,0,32.4,NA,13,15
+PX015,F,60,RE,Trabeculectomy,2023-11-14,2023-05-31,2025-03-05,"misopt, micropost and druphagan",nil,0.48,0.48,0.48,0.48,22,12.7,17.1,15
+PX016,M,46,RE,Trab + SICS,2023-12-12,2023-12-06,2025-07-14,"misopt, diamox",misopt,0.54,0.54,0.54,0.54,23,29,13,19
+PX017,m,68,RE,Trab + SICS,2023-12-12,2023-09-18,2024-06-05,"misopt, micropost",nil,1.08,1.08,0.6,NA,19.8,7.5,23,NA
+PX018,F,80,RE,Trab + SICS,2024-01-09,2024-01-08,2024-02-26,n/a,nil,0.54,0.54,NA,NA,40,12,NA,NA
+PX019,M,42,LE,Trab + SICS,2024-02-06,2023-07-12,2024-05-08,"misopt, diamox",misopt and micropost,0.54,0.54,NA,NA,43,23,NA,NA
+PX020,m,18,RE,Trabeculectomy,2024-02-20,2023-11-13,2024-11-27,"misopt, micropost",nil,0,1.18,0.18,NA,23,3,8,NA
+PX021,M,37,RE,Trabeculectomy,2024-02-27,2023-09-26,2024-03-06,"misopt, micropost",nil,0.78,1,NA,NA,17,5,NA,NA
+PX022,F,60,LE,Trabeculectomy,2024-02-27,2023-05-31,2025-03-05,"misopt, micropost",nil,0,0.78,0,0.78,21,14,21.4,15
+PX023,M,25,RE,Trabeculectomy,2024-05-14,2024-04-16,2024-07-29,"misopt, micropost",nil,0,NA,NA,NA,19,NA,NA,NA
+PX024,F,17,LE,Trabeculectomy,2024-05-28,2024-05-22,2025-08-13,"misopt, diamox",misopt,0.48,NA,0,0,15,NA,10,11
+PX025,M,41,LE,Trabeculectomy,2024-09-03,2023-09-04,2025-04-02,"misopt, micropost",nil,0.6,1,0.48,NA,43,NA,14,NA
+PX026,F,11,RE,Trabeculectomy,2024-09-03,2024-06-13,2024-08-26,n/a,nil,0,0.18,NA,NA,15,5,NA,NA
+PX027,F,65,RE,Trabeculectomy,2024-09-03,2024-01-29,2025-03-24,"misopt, micropost",nil,0.6,1.18,0,NA,23,NA,13,NA
+PX028,M,29,RE,Trabeculectomy,2024-09-24,2024-08-08,2025-04-14,"misopt, micropost",nil,0,0.48,0,NA,17,7,9,NA
+PX029,F,20,RE,Trabeculectomy,2024-10-08,2024-08-13,2025-03-13,misopt,nil,0,0.3,0.48,NA,12,8,10,NA
+PX030,M,9,LE,Trabeculectomy,2025-01-14,2024-03-11,2025-08-25,misopt,nil,0,1.48,0,NA,17,7,12,NA
+PX031,F,14,LE,Trabeculectomy,2025-01-28,2023-12-18,2025-07-09,misopt,nil,0.78,0.18,0.78,NA,24,8,8,NA
+PX032,f,50,LE,Trab + SICS,2025-02-18,2023-09-07,2025-08-20,"misopt, micropost",nil,2,2,0.54,NA,51,20,15,NA
+PX033,M,9,RE,Trabeculectomy,2025-04-26,2024-03-11,2025-08-25,misopt,nil,0,0.78,NA,NA,16,6,NA,NA

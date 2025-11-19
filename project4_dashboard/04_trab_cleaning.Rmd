@@ -1,0 +1,270 @@
+---
+title: "Project 4: Trabeculectomy Outcomes – Data Cleaning"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+library(tidyverse)
+library(readr)
+library(dplyr)
+library(janitor)
+```
+
+## 1. Load the data
+
+```{r load-data}
+# Read the CSV file
+raw_data <- read_csv("data/Trabec pts.csv") %>%
+  select(-c(Name, 'Hosp. No....4', 'Hosp. No....21')) %>%
+  mutate(Patient_ID = paste0("PX", str_pad(row_number(), 3, pad = "0")))
+
+# Peek at the structure
+glimpse(raw_data)
+```
+
+## 2. Rename relevant columns
+
+```{r rename-columns}
+data <- raw_data %>%
+  mutate(
+    va_preop = `VA(First Visit)`,
+    va_1dpo = `VA(1DPO)`,
+    va_6mo = `6/12 post op VA`,
+    va_1yr = `1 yr post op VA`,
+    iop_preop = `Pre-Op IOP`,
+    iop_1dpo= `IOP(1DPO)`,
+    iop_6mo = `6/12 post op IOP`,
+    iop_1yr = `1 yr post op IOP`
+  )
+head(data)
+```
+## 3. Normalize date
+### 3.1 normalize_dates() Function
+```{r}
+library(lubridate)
+
+normalize_dates <- function(x) {
+  x_clean <- parse_date_time(x, 
+                             orders = c("dmy", "mdy", "ymd", "dmy HMS", "ymd HMS"),
+                             tz = "UTC", 
+                             exact = FALSE)
+  return(as.Date(x_clean))
+}
+
+```
+
+### 3.2 Normalize
+```{r}
+data <- data %>%
+  mutate(
+    surgery_date = normalize_dates(`Surgery date...1`),
+    last_visit_date = normalize_dates(`last visit date`),
+    first_visit_date = normalize_dates(`First visit date`)
+  )
+head(data)
+```
+
+### 3.3 Normalize Surgery Column
+```{r}
+# Clean and standardize surgery types
+data <- data %>%
+  mutate(
+    Surgery = str_to_lower(trimws(Surgery)),
+    surgery_clean = case_when(
+      str_detect(Surgery, "ricce") ~ "RICCE + Trab",
+      str_detect(Surgery, "sics") & str_detect(Surgery, "trab") ~ "Trab + SICS",
+      str_detect(Surgery, "sics") ~ "SICS",
+      str_detect(Surgery, "trab") ~ "Trabeculectomy",
+      TRUE ~ NA_character_
+    ),
+    surgery_clean = factor(surgery_clean)
+  )
+```
+
+## 4. Cleaning up va
+### 4.1 va_to_logmar function
+```{r}
+va_to_logmar <- function(x) {
+  x_clean <- tolower(trimws(as.character(x)))
+
+  # 1. Map non-Snellen textual VA to approximate logMAR
+  replacements <- c(
+    "pl"             = 2.0,
+    "hm"             = 2.3,
+    "cf"             = 1.9,
+    "npl"            = 2.7,
+    "nlp"            = 2.7,
+    "no perception"  = 2.7,
+    "no lp"          = 2.7,
+    "nil"            = NA,
+    "folder"         = NA
+  )
+
+  x_clean <- ifelse(x_clean %in% names(replacements),
+                    replacements[x_clean],
+                    x_clean)
+
+  # 2. Convert dot-format to Snellen (e.g. 6.36 -> 6/36, 3.60 -> 3/60)
+  x_clean <- gsub("^(\\d+)\\.(\\d+)$", "\\1/\\2", x_clean)
+
+  # 3. Convert to logMAR
+  logmar <- suppressWarnings(vapply(x_clean, function(val) {
+    # 3a. If already numeric and plausible, treat as logMAR
+    num_val <- suppressWarnings(as.numeric(val))
+    if (!is.na(num_val)) {
+      # accept only plausible logMAR range
+      if (num_val >= 0 && num_val <= 3) {
+        return(num_val)
+      } else {
+        return(NA_real_)
+      }
+    }
+
+    # 3b. If Snellen "a/b", use a and b
+    if (grepl("^[0-9]+/[0-9]+$", val)) {
+      parts  <- strsplit(val, "/")[[1]]
+      num    <- as.numeric(parts[1])
+      denom  <- as.numeric(parts[2])
+
+      if (is.na(num) || is.na(denom) || num <= 0) {
+        return(NA_real_)
+      }
+
+      # logMAR = log10(denominator / numerator)
+      return(round(log10(denom / num), 2))
+    }
+
+    # 3c. Everything else → NA
+    return(NA_real_)
+  }, numeric(1)))
+
+  as.numeric(logmar)
+}
+
+
+```
+### 4.2 code
+```{r}
+data <- data %>%
+  mutate(
+    va_preop_logmar = va_to_logmar(va_preop),
+    va_1dpo_logmar = va_to_logmar(va_1dpo),
+    va_6mo_logmar = va_to_logmar(va_6mo),
+    va_1yr_logmar = va_to_logmar(va_1yr)
+  )
+head(data)
+```
+
+## 5. Code to Clean IOP Columns
+```{r}
+# Standardize and convert IOP columns to numeric
+clean_iop <- function(x) {
+  x <- tolower(trimws(as.character(x)))
+  x[x %in% c("na", "nil", "", "-", "--")] <- NA
+  as.numeric(x)
+}
+
+data <- data %>%
+  mutate(
+    iop_1dpo  = clean_iop(iop_1dpo),
+    iop_6mo  = clean_iop(iop_6mo),
+    iop_1yr  = clean_iop(iop_1yr)
+  )
+
+```
+### 5.1 
+```{r}
+data <- data %>%
+  mutate(
+    iop_drop_6mo = iop_1dpo - iop_6mo,
+    iop_drop_1yr = iop_6mo - iop_1yr
+  )
+head(data)
+```
+
+## 6. Pivot longer
+```{r}
+clean_iop <- function(x) {
+  x <- tolower(trimws(as.character(x)))
+  x[x %in% c("na", "n/a", "nil", "", "-", "--", "n.a.")] <- NA
+  suppressWarnings(as.numeric(x))
+}
+
+data <- data %>%
+  mutate(
+    across(
+      starts_with("iop_"),
+      clean_iop
+    )
+  )
+```
+
+
+```{r}
+# 1) IOP long format
+iop_long <- data %>%
+  select(Patient_ID, Eye, Age, Sex,
+         iop_preop, iop_1dpo, iop_6mo, iop_1yr) %>%
+  pivot_longer(
+    cols = starts_with("iop_"),
+    names_to = "timepoint",
+    values_to = "iop"
+  ) %>%
+  mutate(
+    timepoint = factor(
+      timepoint,
+      levels = c("iop_preop", "iop_1dpo", "iop_6mo", "iop_1yr")
+    )
+  )
+
+# 2) VA long format (adjust names to what you actually have)
+va_long <- data %>%
+  select(Patient_ID, Eye,
+         va_preop_logmar, va_1dpo_logmar, va_6mo_logmar, va_1yr_logmar) %>%
+  pivot_longer(
+    cols = starts_with("va_"),
+    names_to = "timepoint",
+    values_to = "va_logmar"
+  ) %>%
+  mutate(
+    timepoint = factor(
+      timepoint,
+      levels = c("va_preop_logmar", "va_1dpo_logmar", "va_6mo_logmar",
+                 "va_1yr_logmar")
+    )
+  )
+```
+
+# Final Column Cleanup: Drop raw & duplicate fields
+
+```{r}
+final_cols <- c(
+  "Patient_ID", "Sex", "Age", "Eye", "surgery_clean",
+  "surgery_date", "first_visit_date", "last_visit_date", "Pre-Op medication", "Current medication",
+
+  # Cleaned VA and IOP at each timepoint
+  "va_preop_logmar", "va_1dpo_logmar", "va_6mo_logmar", "va_1yr_logmar",
+  "iop_preop", "iop_1dpo", "iop_6mo", "iop_1yr"
+  )
+
+# Retain only final analysis variables
+data <- data[, final_cols]
+
+```
+
+
+## 7. Save cleaned dataset for analysis
+
+```{r}
+# Create a data/ folder if it doesn't exist
+if (!dir.exists("data")) dir.create("data")
+
+# Save the fully cleaned trabeculectomy dataset
+readr::write_csv(data, "data/trab_clean.csv")
+```
+
+```{r}
+names(data)
+```
+

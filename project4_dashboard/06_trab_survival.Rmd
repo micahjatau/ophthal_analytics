@@ -1,0 +1,126 @@
+
+--- 
+title: 'Project 4 – Trabeculectomy survival: LMM, KM'
+output:
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+library(tidyverse)
+library(scales)
+library(lme4)
+library(lmerTest)
+library(emmeans)
+library(survival)
+library(survminer)
+library(ggsurvfit)
+```
+
+## Load Data
+```{r}
+data <- read.csv("data/trab_clean.csv")
+```
+
+
+## Prepare Long Format for Modeling
+```{r}
+iop_long_model <- data %>%
+  dplyr::select(Patient_ID, Age, surgery_clean, iop_preop, iop_1dpo, iop_6mo, iop_1yr) %>%
+  tidyr::pivot_longer(
+    cols = starts_with("iop_"),
+    names_to = "timepoint",
+    values_to = "IOP"
+  ) %>%
+  dplyr::filter(!is.na(IOP)) %>%
+  dplyr::mutate(
+    timepoint = factor(timepoint,
+      levels = c("iop_preop", "iop_1dpo", "iop_6mo", "iop_1yr", "iop_2yr"),
+      labels = c("Pre-op", "1DPO", "6MO", "1YR", "2YR")
+    )
+  )
+```
+
+## Fit Linear Mixed Model
+```{r}
+# LMM: IOP as outcome, timepoint as fixed effect, random intercept for each patient
+model_iop_lmm <- lmer(IOP ~ timepoint + (1 | Patient_ID), data = iop_long_model)
+
+# Summary of fixed effects
+summary(model_iop_lmm)
+```
+## Plot Model Predictions
+```{r}
+emm <- emmeans(model_iop_lmm, ~ timepoint)
+plot(emm, comparisons = TRUE) +
+  labs(
+    title = "Estimated Mean IOP with 95% CI",
+    x = "Timepoint",
+    y = "Predicted IOP (mmHg)"
+  ) +
+  theme_minimal()
+```
+
+## Add Covariates to the IOP Model
+
+Let’s test if surgery type or age influences IOP trajectory:
+
+```{r}
+# Linear Mixed Model with Surgery Type and Age
+model_cov <- lmer(IOP ~ timepoint + surgery_clean + Age + (1 | Patient_ID), data = iop_long_model)
+
+summary(model_cov)
+```
+## KM Analysis
+
+Define Failure and Time-to-Event Variables
+- Assume we define failure as:
+- IOP > 21 or
+- Meds restarted (not med-free).
+
+You’ll need these columns:
+```{r}
+# Create survival variables
+ data <- data %>%
+  mutate(
+    # Use last known IOP and meds status for defining failure
+    time_to_event = case_when(
+      !is.na(iop_6mo) & iop_6mo > 21 ~ 6,
+      !is.na(iop_1yr) & iop_1yr > 21 ~ 12,
+      !is.na("Current.medication") & "Current.medication" == 1 ~ 18,
+      TRUE ~ NA_real_
+    ),
+    status = if_else(!is.na(time_to_event), 1L, 0L),
+    time_to_event = if_else(is.na(time_to_event), 18, time_to_event)
+  )
+```
+
+## Build and Plot Kaplan-Meier Curve
+```{r}
+# Create the survival object
+km_object <- Surv(time = data$time_to_event, event = data$status)
+
+# Fit the Kaplan-Meier survival curve
+km_fit <- survfit(Surv(time_to_event, status) ~ 1, data = data)
+
+km_fit
+
+# Plot
+km_fit %>%
+  ggsurvfit() +
+  labs(
+    title = "Kaplan-Meier Curve: Time to Failure",
+    x = "Months Since Surgery",
+    y = "Probability of Success"
+  ) +
+  theme_minimal()
+```
+
+## Save Cleaned + Long Data
+
+```{r}
+#Export cleaned files for reproducibility:
+write.csv(data, "data/trab_survival.csv", row.names = FALSE)
+write.csv(iop_long_model, "data/iop_long.csv", row.names = FALSE)
+```
+

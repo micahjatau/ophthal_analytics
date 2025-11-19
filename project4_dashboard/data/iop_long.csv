@@ -1,0 +1,82 @@
+"Patient_ID","Age","surgery_clean","timepoint","IOP"
+"PX003",45,"Trab + SICS","Pre-op",30
+"PX004",75,"Trab + SICS","Pre-op",11
+"PX004",75,"Trab + SICS","1DPO",2
+"PX004",75,"Trab + SICS","6MO",6
+"PX004",75,"Trab + SICS","1YR",9
+"PX005",62,"Trab + SICS","Pre-op",32
+"PX005",62,"Trab + SICS","1DPO",12
+"PX005",62,"Trab + SICS","6MO",55
+"PX005",62,"Trab + SICS","1YR",33
+"PX007",56,"Trabeculectomy","6MO",10
+"PX008",56,"Trabeculectomy","6MO",11
+"PX009",56,"Trab + SICS","Pre-op",12
+"PX009",56,"Trab + SICS","1DPO",6
+"PX009",56,"Trab + SICS","6MO",13.7
+"PX010",54,"Trabeculectomy","Pre-op",36
+"PX010",54,"Trabeculectomy","1DPO",17
+"PX010",54,"Trabeculectomy","6MO",10
+"PX010",54,"Trabeculectomy","1YR",36
+"PX011",58,"Trab + SICS","Pre-op",16
+"PX011",58,"Trab + SICS","1DPO",10
+"PX011",58,"Trab + SICS","1YR",16
+"PX012",62,"Trabeculectomy","Pre-op",28.9
+"PX012",62,"Trabeculectomy","1DPO",10.3
+"PX012",62,"Trabeculectomy","6MO",6
+"PX013",62,"Trabeculectomy","Pre-op",28.9
+"PX013",62,"Trabeculectomy","1DPO",12
+"PX013",62,"Trabeculectomy","6MO",6
+"PX014",41,"Trabeculectomy","Pre-op",32.4
+"PX014",41,"Trabeculectomy","6MO",13
+"PX014",41,"Trabeculectomy","1YR",15
+"PX015",60,"Trabeculectomy","Pre-op",22
+"PX015",60,"Trabeculectomy","1DPO",12.7
+"PX015",60,"Trabeculectomy","6MO",17.1
+"PX015",60,"Trabeculectomy","1YR",15
+"PX016",46,"Trab + SICS","Pre-op",23
+"PX016",46,"Trab + SICS","1DPO",29
+"PX016",46,"Trab + SICS","6MO",13
+"PX016",46,"Trab + SICS","1YR",19
+"PX017",68,"Trab + SICS","Pre-op",19.8
+"PX017",68,"Trab + SICS","1DPO",7.5
+"PX017",68,"Trab + SICS","6MO",23
+"PX018",80,"Trab + SICS","Pre-op",40
+"PX018",80,"Trab + SICS","1DPO",12
+"PX019",42,"Trab + SICS","Pre-op",43
+"PX019",42,"Trab + SICS","1DPO",23
+"PX020",18,"Trabeculectomy","Pre-op",23
+"PX020",18,"Trabeculectomy","1DPO",3
+"PX020",18,"Trabeculectomy","6MO",8
+"PX021",37,"Trabeculectomy","Pre-op",17
+"PX021",37,"Trabeculectomy","1DPO",5
+"PX022",60,"Trabeculectomy","Pre-op",21
+"PX022",60,"Trabeculectomy","1DPO",14
+"PX022",60,"Trabeculectomy","6MO",21.4
+"PX022",60,"Trabeculectomy","1YR",15
+"PX023",25,"Trabeculectomy","Pre-op",19
+"PX024",17,"Trabeculectomy","Pre-op",15
+"PX024",17,"Trabeculectomy","6MO",10
+"PX024",17,"Trabeculectomy","1YR",11
+"PX025",41,"Trabeculectomy","Pre-op",43
+"PX025",41,"Trabeculectomy","6MO",14
+"PX026",11,"Trabeculectomy","Pre-op",15
+"PX026",11,"Trabeculectomy","1DPO",5
+"PX027",65,"Trabeculectomy","Pre-op",23
+"PX027",65,"Trabeculectomy","6MO",13
+"PX028",29,"Trabeculectomy","Pre-op",17
+"PX028",29,"Trabeculectomy","1DPO",7
+"PX028",29,"Trabeculectomy","6MO",9
+"PX029",20,"Trabeculectomy","Pre-op",12
+"PX029",20,"Trabeculectomy","1DPO",8
+"PX029",20,"Trabeculectomy","6MO",10
+"PX030",9,"Trabeculectomy","Pre-op",17
+"PX030",9,"Trabeculectomy","1DPO",7
+"PX030",9,"Trabeculectomy","6MO",12
+"PX031",14,"Trabeculectomy","Pre-op",24
+"PX031",14,"Trabeculectomy","1DPO",8
+"PX031",14,"Trabeculectomy","6MO",8
+"PX032",50,"Trab + SICS","Pre-op",51
+"PX032",50,"Trab + SICS","1DPO",20
+"PX032",50,"Trab + SICS","6MO",15
+"PX033",9,"Trabeculectomy","Pre-op",16
+"PX033",9,"Trabeculectomy","1DPO",6
