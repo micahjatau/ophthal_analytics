@@ -163,19 +163,19 @@ success_1yr_30pct = if_else(
 
 Medication fields are free text:
 
-Pre-Op medication:
+	- Pre-Op medication:
 
-"n/a" means unknown or not recorded.
+		- "n/a" means unknown or not recorded.
 
-Current medication:
+	- Current medication:
 
-"nil" means no current glaucoma drops.
+		- "nil" means no current glaucoma drops.
 
 Two helper functions reduce these to:
 
-meds_preop_any – 1 if on any pre operative medication, 0 if known to be on none, NA if unknown.
+	- meds_preop_any – 1 if on any pre operative medication, 0 if known to be on none, NA if unknown.
 
-meds_current_any – 1 if on medication at last follow up, 0 if explicitly off, NA if unclear.
+	- meds_current_any – 1 if on medication at last follow up, 0 if explicitly off, NA if unclear.
 
 An indicator med_free_last is 1 where the patient is recorded as off treatment at last follow up.
 
@@ -196,29 +196,29 @@ qualified_success_last = if_else(
 
 Details are in REPORT.md. In brief:
 
-Sample: 33 operated eyes. Mean age about 45 years. Most underwent trabeculectomy alone, some had combined trabeculectomy with cataract extraction.
+- Sample: 33 operated eyes. Mean age about 45 years. Most underwent trabeculectomy alone, some had combined trabeculectomy with cataract extraction.
 
-IOP trajectory:
+- IOP trajectory:
 
-Mean pre operative IOP about 24.6 mmHg.
+	- Mean pre operative IOP about 24.6 mmHg.
 
-Around 10.8 mmHg at day 1, 13.8 mmHg at six months, and 18.8 mmHg at one year among those with data.
+	- Around 10.8 mmHg at day 1, 13.8 mmHg at six months, and 18.8 mmHg at one year among those with data.
 
-Paired tests show a statistically significant drop in IOP from baseline to six months.
+	- Paired tests show a statistically significant drop in IOP from baseline to six months.
 
-Linear mixed models confirm that timepoint is a strong predictor of IOP, while age and surgery type do not show clear additional effects in this small sample.
+	- Linear mixed models confirm that timepoint is a strong predictor of IOP, while age and surgery type do not show clear additional effects in this small sample.
 
-Visual acuity:
+- Visual acuity:
 
-LogMAR VA is broadly stable at six months.
+	- LogMAR VA is broadly stable at six months.
 
-Some eyes improve, some worsen, but mean change is small and not statistically significant.
+	- Some eyes improve, some worsen, but mean change is small and not statistically significant.
 
-Medication burden and success:
+- Medication burden and success:
 
-A majority of eyes with documented current treatment are off glaucoma medication at last follow up.
+	- A majority of eyes with documented current treatment are off glaucoma medication at last follow up.
 
-Under a strict combined definition (IOP threshold, percentage drop and medication status), only a small number meet complete or qualified success, partly reflecting small sample size and missing data.
+	- Under a strict combined definition (IOP threshold, percentage drop and medication status), only a small number meet complete or qualified success, partly reflecting small sample size and missing data.
 
 These results are intended to demonstrate end to end handling of messy clinical data, longitudinal outcome definition, and basic modelling in R, rather than to provide definitive clinical benchmarks.
 
@@ -226,34 +226,34 @@ These results are intended to demonstrate end to end handling of messy clinical 
 
 ## 6. How to reproduce
 
-Set the working directory to the project root in R or RStudio.
+1. Set the working directory to the project root in R or RStudio.
 
-Install required packages:
+2. Install required packages:
 
 ```r
 install.packages(c("tidyverse", "lubridate", "scales", "lme4", "lmerTest", "survival", "survminer"))
 ```
 
-Knit the R Markdown files in sequence:
+3. Knit the R Markdown files in sequence:
 
-04_trab_cleaning.Rmd
+- 04_trab_cleaning.Rmd
 
-05_trab_outcomes.Rmd
+- 05_trab_outcomes.Rmd
 
-06_trab_survival.Rmd (optional)
+- 06_trab_survival.Rmd (optional)
 
-Inspect the HTML outputs and data/trab_clean.csv.
+4. Inspect the HTML outputs and data/trab_clean.csv.
 
 ---
 
 ## 7. Limitations
 
-Small sample size and incomplete follow up, especially at one year.
+- Small sample size and incomplete follow up, especially at one year.
 
-Pre operative medication data are partly unknown and coded from free text.
+- Pre operative medication data are partly unknown and coded from free text.
 
-Visual field progression, optic nerve imaging and complications are not available in structured form.
+- Visual field progression, optic nerve imaging and complications are not available in structured form.
 
-The success definitions are strict and may differ from other studies, though they are explicitly documented here.
+- The success definitions are strict and may differ from other studies, though they are explicitly documented here.
 
 See REPORT.md for a more detailed narrative of the findings and their implications.
