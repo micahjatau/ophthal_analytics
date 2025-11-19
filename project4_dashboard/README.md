@@ -145,9 +145,9 @@ iop_drop_1yr  = iop_preop - iop_1yr
 iop_pct_drop_6mo = iop_drop_6mo / iop_preop
 iop_pct_drop_1yr = iop_drop_1yr / iop_preop
 IOP based success:
+```
 
-r
-Copy code
+```r
 success_6mo_30pct = if_else(
   !is.na(iop_6mo) & iop_6mo <= 21 & iop_pct_drop_6mo >= 0.30,
   1L, 0L
@@ -157,6 +157,7 @@ success_1yr_30pct = if_else(
   !is.na(iop_1yr) & iop_1yr <= 21 & iop_pct_drop_1yr >= 0.30,
   1L, 0L
 )
+```
 
 ### 4.4 Medication coding and success type
 
@@ -180,8 +181,7 @@ An indicator med_free_last is 1 where the patient is recorded as off treatment a
 
 Complete and qualified success:
 
-r
-Copy code
+```r
 complete_success_last  = if_else(
   success_1yr_30pct == 1L & med_free_last == 1L, 1L, 0L
 )
@@ -189,7 +189,7 @@ complete_success_last  = if_else(
 qualified_success_last = if_else(
   success_1yr_30pct == 1L & med_free_last == 0L, 1L, 0L
 )
-
+```
 ---
 
 ## 5. Analysis outline and headline findings
@@ -230,9 +230,10 @@ Set the working directory to the project root in R or RStudio.
 
 Install required packages:
 
-r
-Copy code
+```r
 install.packages(c("tidyverse", "lubridate", "scales", "lme4", "lmerTest", "survival", "survminer"))
+```
+
 Knit the R Markdown files in sequence:
 
 04_trab_cleaning.Rmd
