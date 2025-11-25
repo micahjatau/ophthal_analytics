@@ -107,4 +107,5 @@ A simple model using age and VA alone can recover the logic of a more detailed r
 **Next**: Consider testing more complex classifiers or visualizing referral probability over age and VA strata.
 
 
-See full analysis in [03_referral_model.Rmd](03_referral_model.Rmd), report [03_referral_model_report.Rmd](03_referral_model_report.Rmd) and output [03_referral_model.html](03_referral_model.html).
+
+See full analysis in [03_referral_model.Rmd](03_referral_model.Rmd), report [03_referral_model_report.md](03_referral_model_report.md) and output [03_referral_model.html](03_referral_model.html).
