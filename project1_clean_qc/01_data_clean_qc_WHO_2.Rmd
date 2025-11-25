@@ -1,0 +1,325 @@
+---
+title: "01_data_clean_qc(WHO)"
+output: html_document
+---
+ 
+```{r}
+# Install packages if not already installed (optional)
+# install.packages(c('tidyverse', 'janitor', 'skimr', 'here', 'naniar', 'scales'))
+```
+
+## Load packages
+
+```{r}
+library(tidyverse)
+library(janitor)
+library(skimr)
+library(here)
+library(naniar)
+library(scales)
+```
+
+## Read our data
+
+```{r}
+data_raw <- read.csv("data_raw/akurba_cleaned_anonymised (1).csv")
+```
+
+## Let's take a peek at our dataset
+
+```{r}
+glimpse(data_raw)
+```
+
+## View of our columns
+
+```{r}
+names(data_raw)
+```
+
+## Basic data quality checks
+
+Content:
+
+Dimensions: number of rows and columns.
+
+Missingness by variable.
+
+Duplicates on patient_id if present.
+
+Simple range checks: age, VA.
+
+```{r}
+dim(data_raw)
+```
+
+```{r}
+skim(data_raw)
+```
+
+```{r}
+vis_miss(data_raw)
+```
+
+Check age range:
+
+```{r}
+data_raw %>% summarise(min_age = min(Age, na.rm = TRUE),
+                         max_age = max(Age, na.rm = TRUE))
+```
+
+## Key variables
+
+```{r}
+data_clean <- data_raw %>%
+  rename(va_re = VA.RE., va_le = VA.LE., diagnosis=Provisional.Diagnosis, diagnosis_cat=Diagnostic.Category) %>%
+  mutate(
+    Sex = case_when(
+      Sex %in% c("M", "Male", "male") ~ "Male",
+      Sex %in% c("F", "Female", "female") ~ "Female",
+      TRUE ~ NA_character_
+    ),
+    age_group = case_when(
+      Age < 18 ~ "Child",
+      Age >= 18 & Age < 45 ~ "Adult",
+      Age >= 45 & Age < 65 ~ "Middle_aged",
+      Age >= 65 ~ "Elderly",
+      TRUE ~ NA_character_
+    ),
+    age_group = factor(age_group,
+      levels = c("Child", "Adult", "Middle_aged", "Elderly")
+    )
+  )
+```
+
+## Sex frequency table
+```{r}
+# Frequency table for 'Sex'
+data_clean %>%
+  count(Sex) %>%
+  mutate(percentage = n / sum(n) * 100)
+```
+
+## View of cleaned columns
+
+```{r}
+head(data_clean)
+```
+
+## Visual acuity feature engineering
+
+Working va_rank() function according to WHO classification of visual impairment
+
+```{r}
+va_rank <- function(x) {
+  s <- toupper(trimws(as.character(x)))
+  s[s %in% c("", "NA", "NAN")] <- NA_character_
+
+  out <- rep(NA_integer_, length(s))
+
+  # WHO-style very poor vision
+  out[s %in% c("6/6")]   <- 1L
+  out[s %in% c("6/9")]   <- 2L
+  out[s %in% c("6/12")]  <- 3L
+  out[s %in% c("6/18")]  <- 4L  # mild VI starts here
+  out[s %in% c("6/24")]  <- 5L
+  out[s %in% c("6/36")]  <- 6L
+  out[s %in% c("6/60")]  <- 7L  # moderate VI
+  out[s %in% c("3/60")]  <- 8L  # severe VI
+  out[s %in% c("1/60")]  <- 9L  # blindness
+  out[s %in% c("CF", "CF@2M", "CF @ 2M")] <- 9L  # treat as <1/60
+  out[s %in% c("HM", "PL")] <- 10L  # blindness
+  out[s %in% c("NPL", "NLP")] <- 11L  # no perception
+
+  # Handle general 6/XX entries not explicitly covered
+  frac_idx <- grepl("^6/[0-9]+", s) & is.na(out)
+  dens <- suppressWarnings(as.integer(sub("^6/([0-9]+).*", "\\1", s[frac_idx])))
+
+  out[frac_idx] <- dplyr::case_when(
+    dens <= 6  ~ 1L,
+    dens <= 9  ~ 2L,
+    dens <= 12 ~ 3L,
+    dens <= 18 ~ 4L,
+    dens <= 24 ~ 5L,
+    dens <= 36 ~ 6L,
+    dens <= 60 ~ 7L,
+    dens <= 120 ~ 8L,
+    TRUE        ~ 9L
+  )
+
+  return(out)
+}
+```
+
+## Cleaning VA according to WHO Classification of blindness
+
+```{r}
+data_clean <- data_clean %>%
+  mutate(
+    # Rank each eye
+    va_re_rank = va_rank(va_re),
+    va_le_rank = va_rank(va_le),
+
+    # Better eye rank
+    better_eye_rank = pmin(va_re_rank, va_le_rank, na.rm = TRUE),
+    better_eye_rank = ifelse(is.infinite(better_eye_rank), NA, better_eye_rank),
+
+    # WHO-aligned VA categories
+    who_va_cat = case_when(
+      better_eye_rank %in% 1:2 ~ "Normal",
+      better_eye_rank == 3     ~ "Mild VI",       # 6/12
+      better_eye_rank == 4     ~ "Moderate VI",   # 6/18
+      better_eye_rank %in% 5:6 ~ "Severe VI",     # 6/24–6/36
+      better_eye_rank >= 7     ~ "Blindness",     # 6/60 and worse
+      TRUE ~ NA_character_
+    )
+  ) %>%
+  mutate(
+    # Convert to ordered WHO factor
+    who_va_cat = factor(
+      who_va_cat,
+      levels = c("Normal", "Mild VI", "Moderate VI", "Severe VI", "Blindness"),
+      ordered = TRUE
+    )
+  )
+```
+
+## Categorization of visual impairment
+
+```{r}
+high_risk_cats <- c(
+  "Cataract-related",
+  "Glaucoma-related",
+  "Corneal disorders",
+  "Trauma-related",
+  "Others"
+)
+
+data_clean <- data_clean %>%
+  mutate(
+    referral_needed = case_when(
+      # 1. High risk diagnostic categories
+      diagnosis_cat %in% high_risk_cats ~ 1L,
+
+      # 2. Moderate VI or worse in better eye
+      who_va_cat %in% c("Moderate VI", "Severe VI", "Blindness") ~ 1L,
+
+      # 3. Cannot assess VA properly
+      is.na(who_va_cat) ~ 1L,
+
+      # 4. Everyone else
+      TRUE ~ 0L
+    )
+  )
+```
+
+## View of cleaned VA
+
+```{r}
+head(data_clean)
+```
+
+## Cleaned dataset Export
+
+```{r}
+write.csv(data_clean, "data_processed/akurba_with_referral.csv", row.names = FALSE)
+```
+
+## Summary tables
+
+### Referral rate by age_group
+
+```{r}
+ref_by_age <- data_clean %>%
+  group_by(age_group) %>%
+  summarise(
+    n = n(),
+    referrals = sum(referral_needed == 1, na.rm = TRUE),
+    referral_rate = referrals / n,
+    referral_rate_pct = percent(referral_rate, accuracy = 0.1)
+  ) %>%
+  arrange(age_group)
+
+ref_by_age
+```
+
+```{r}
+#Plot
+ggplot(ref_by_age, aes(x = age_group, y = referral_rate)) +
+  geom_col() +
+  scale_y_continuous(labels = percent_format(accuracy = 1)) +
+  labs(
+    title = "Referral rate by age group",
+    x = "Age group",
+    y = "Referral rate"
+  )
+```
+
+Referral rates increased with age. Children had the lowest referral proportion, while elderly patients had the highest. This is consistent with the expected burden of cataract and other age related ocular disease in older age groups
+
+### Referral rate by Diagnostic.Category
+
+```{r}
+ref_by_diag <- data_clean %>%
+  group_by(diagnosis_cat) %>%
+  summarise(
+    n = n(),
+    referrals = sum(referral_needed == 1, na.rm = TRUE),
+    referral_rate = referrals / n,
+    referral_rate_pct = percent(referral_rate, accuracy = 0.1)
+  ) %>%
+  arrange(desc(referral_rate))
+
+ref_by_diag
+```
+
+```{r}
+ggplot(ref_by_diag,
+       aes(x = reorder(diagnosis_cat, referral_rate),
+           y = referral_rate)) +
+  geom_col() +
+  coord_flip() +
+  scale_y_continuous(labels = percent_format(accuracy = 1)) +
+  labs(
+    title = "Referral rate by diagnostic category",
+    x = "Diagnostic category",
+    y = "Referral rate"
+  )
+```
+
+Cataract-related and glaucoma-related diagnoses had the highest referral proportions, as expected for conditions requiring specialist evaluation and possible surgery. Conditions grouped as ‘Refractive error’ or ‘Allergic conjunctivitis’ showed lower referral rates, reflecting management at the outreach level
+
+### Distribution of better_eye_cat
+
+```{r}
+data_clean <- data_clean %>%
+  mutate(
+    who_va_cat = factor(
+      who_va_cat,
+      levels = c("Normal", "Mild VI", "Moderate VI", "Severe VI", "Blindness")
+    )
+  )
+
+who_va_dist <- data_clean %>%
+  count(who_va_cat) %>%
+  mutate(
+    prop = n / sum(n),
+    prop_pct = percent(prop, accuracy = 0.1)
+  ) %>%
+  arrange(who_va_cat)
+
+who_va_dist
+```
+
+```{r}
+ggplot(data_clean, aes(x = who_va_cat)) +
+  geom_bar() +
+  labs(
+    title = "Distribution of better eye visual acuity category",
+    x = "Better eye category",
+    y = "Number of patients"
+  )
+```
+
+Most patients presented with [Normal_mild / Moderate / Severe] visual acuity in the better eye, with [X%] having severe or very poor vision. This highlights the proportion of attendees with advanced visual impairment at first contact.
+
