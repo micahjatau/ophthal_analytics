@@ -145,6 +145,3 @@ Future work should focus on external validation, integration into electronic too
 ## References
 
 1. World Health Organization. World report on vision. Geneva: WHO.
-2. Relevant national blindness and visual impairment surveys for Nigeria.
-3. Standard texts and guidelines on community eye health and cataract surgery services.
-4. Methodological references for logistic regression and clinical prediction model development.
