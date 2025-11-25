@@ -207,10 +207,11 @@ Adjust paths to match your actual setup.
 
 The current audit data show:
 
-	- Criteria for Stage 1 and Stage 2 marked as Yes.
+- Criteria for Stage 1 and Stage 2 marked as Yes.
 
-	- Criteria for Stage 3 and Stage 4 marked as No, with notes indicating clinical documentation is present but CDSS and CPOE are not yet implemented.
+- Criteria for Stage 3 and Stage 4 marked as No, with notes indicating clinical documentation is present but CDSS and CPOE are not yet implemented.
 
 Under a simple hierarchical rule, the hospital’s EMRAM stage is therefore Stage 2. That corresponds to a setting with a clinical data repository and coded data, but without advanced clinical documentation, CDSS, or CPOE fully in place.
+
 
 This should be interpreted as an early to intermediate level of EMR maturity, with clear next steps defined by the Stage 3 and Stage 4 criteria.
