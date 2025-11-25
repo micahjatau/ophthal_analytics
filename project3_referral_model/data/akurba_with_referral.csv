@@ -1,0 +1,244 @@
+"Patient_ID","Age","Sex","va_re","va_le","diagnosis","diagnosis_cat","age_group","va_re_rank","va_le_rank","better_eye_rank","better_eye_cat","referral_needed"
+"P001",45,"Female","6/36","6/12","Binasal Pterygium","Conjunctival/surface disorders","Middle_aged",6,3,3,"Moderate",0
+"P002",70,"Male","6/36","6/60","Le Senile Cataract","Cataract-related","Elderly",6,7,6,"Severe",1
+"P003",54,"Female","6/24","6/18","Presbyopia","Refractive disorders","Middle_aged",5,4,4,"Moderate",1
+"P004",50,"Female","6/36","6/36","Bilateral Elo","Cataract-related","Middle_aged",6,6,6,"Severe",1
+"P005",72,"Female","6/36","6/24","Le Senile Cataract","Cataract-related","Elderly",6,5,5,"Severe",1
+"P006",50,"Male","6/9","6/9","Presbyopia","Refractive disorders","Middle_aged",2,2,2,"Normal_mild",0
+"P007",53,"Male","HM","6/6","Re Secondary Glaucoma","Glaucoma-related","Middle_aged",10,1,1,"Normal_mild",1
+"P008",30,"Female","6/6","6/6","Allergy","Conjunctival/surface disorders","Adult",1,1,1,"Normal_mild",0
+"P009",47,"Female","6/6","6/6","Presbyopia","Refractive disorders","Middle_aged",1,1,1,"Normal_mild",0
+"P010",60,"Female","6/60","6/24","Bilateral Senile Cataract","Cataract-related","Middle_aged",7,5,5,"Severe",1
+"P011",37,"Male","6/6","6/6","Presbyopia","Refractive disorders","Adult",1,1,1,"Normal_mild",0
+"P012",4,"Female","","","Allergy","Conjunctival/surface disorders","Child",NA,NA,NA,NA,1
+"P013",4,"Male","","","Allergy","Conjunctival/surface disorders","Child",NA,NA,NA,NA,1
+"P014",35,"Female","6/6","6/9","Presbyopia","Refractive disorders","Adult",1,2,1,"Normal_mild",0
+"P015",20,"Male","6/6","6/6","Allergy","Conjunctival/surface disorders","Adult",1,1,1,"Normal_mild",0
+"P016",25,"Female","6/6","6/6","Re Pterygium","Conjunctival/surface disorders","Adult",1,1,1,"Normal_mild",0
+"P017",8,"Female","6/6","6/6","Allergy","Conjunctival/surface disorders","Child",1,1,1,"Normal_mild",0
+"P018",40,"Female","6/36","6/36","Elo","Cataract-related","Adult",6,6,6,"Severe",1
+"P019",40,"Female","6/24","6/36","Presbyopia","Refractive disorders","Adult",5,6,5,"Severe",1
+"P020",45,"Female","6/12","6/24","Elo","Cataract-related","Middle_aged",3,5,3,"Moderate",1
+"P021",30,"Male","6/6","6/6","Squint","Others","Adult",1,1,1,"Normal_mild",1
+"P022",6,"Male","6/6","6/6","Vkc","Conjunctival/surface disorders","Child",1,1,1,"Normal_mild",0
+"P023",18,"Female","6/6","6/6","Allergy","Conjunctival/surface disorders","Adult",1,1,1,"Normal_mild",0
+"P024",50,"Male","6/18","6/36","Bilateral Elo","Cataract-related","Middle_aged",4,6,4,"Moderate",1
+"P025",50,"Female","6/6","6/6","Presbyopia","Refractive disorders","Middle_aged",1,1,1,"Normal_mild",0
+"P026",55,"Male","6/6","6/6","Presbyopia","Refractive disorders","Middle_aged",1,1,1,"Normal_mild",0
+"P027",9,"Female","6/9","6/36","Le Corneal Opacity","Corneal disorders","Child",2,6,2,"Normal_mild",1
+"P028",13,"Male","6/18","6/18","Allergy","Conjunctival/surface disorders","Child",4,4,4,"Moderate",1
+"P029",58,"Female","6/9","6/18","Presbyopia","Refractive disorders","Middle_aged",2,4,2,"Normal_mild",0
+"P030",52,"Male","6/9","6/9","Presbyopia","Refractive disorders","Middle_aged",2,2,2,"Normal_mild",0
+"P031",30,"Male","6/36","6/36","Refractive Error","Refractive disorders","Adult",6,6,6,"Severe",1
+"P032",50,"Female","6/18","6/12","Bilateral Elo","Cataract-related","Middle_aged",4,3,3,"Moderate",1
+"P033",14,"Male","6/6","6/6","Allergy","Conjunctival/surface disorders","Child",1,1,1,"Normal_mild",0
+"P034",20,"Female","6/6","1/60","Le Blunt Ocular Trauma","Trauma-related","Adult",1,9,1,"Normal_mild",1
+"P035",55,"Female","6/36","6/24","Bilateral Elo","Cataract-related","Middle_aged",6,5,5,"Severe",1
+"P036",52,"Female","6/12","5/60","Le Senile Cataract","Cataract-related","Middle_aged",3,NA,3,"Moderate",1
+"P037",45,"Female","6/24","6/18","Allergy","Conjunctival/surface disorders","Middle_aged",5,4,4,"Moderate",1
+"P038",50,"Female","6/36","6/60","Bilateral Senile Cataract","Cataract-related","Middle_aged",6,7,6,"Severe",1
+"P039",56,"Female","6/24","6/18","Bilateral Elo","Cataract-related","Middle_aged",5,4,4,"Moderate",1
+"P040",55,"Male","3/60","6/36","Re Mature Cataract","Cataract-related","Middle_aged",8,6,6,"Severe",1
+"P041",30,"Female","6/6","6/6","Allergy","Conjunctival/surface disorders","Adult",1,1,1,"Normal_mild",0
+"P042",18,"Female","1/60","6/12","Re Traumatic Cataract","Cataract-related","Adult",9,3,3,"Moderate",1
+"P043",65,"Female","3/60","6/12","Glaucoma","Glaucoma-related","Elderly",8,3,3,"Moderate",1
+"P044",24,"Female","6/6","6/6","Allergy","Conjunctival/surface disorders","Adult",1,1,1,"Normal_mild",0
+"P045",29,"Female","6/9","6/9","Allergy","Conjunctival/surface disorders","Adult",2,2,2,"Normal_mild",0
+"P046",35,"Female","6/6","6/6","Allergy","Conjunctival/surface disorders","Adult",1,1,1,"Normal_mild",0
+"P047",4,"Male","6/6","6/6","Vkc","Conjunctival/surface disorders","Child",1,1,1,"Normal_mild",0
+"P048",60,"Female","6/36","6/36","Allergy","Conjunctival/surface disorders","Middle_aged",6,6,6,"Severe",1
+"P049",62,"Female","6/60","6/12","Re Mature Cataract","Cataract-related","Middle_aged",7,3,3,"Moderate",1
+"P050",19,"Female","6/6","6/6","Allergy","Conjunctival/surface disorders","Adult",1,1,1,"Normal_mild",0
+"P051",38,"Female","6/6","6/6","Presbyopia","Refractive disorders","Adult",1,1,1,"Normal_mild",0
+"P052",40,"Female","6/6","6/6","Presbyopia","Refractive disorders","Adult",1,1,1,"Normal_mild",0
+"P053",45,"Female","6/6","6/6","Presbyopia","Refractive disorders","Middle_aged",1,1,1,"Normal_mild",0
+"P054",40,"Female","6/6","6/12","Presbyopia","Refractive disorders","Adult",1,3,1,"Normal_mild",0
+"P055",87,"Female","4/60","5/60","Bilateral Mature Cataract","Cataract-related","Elderly",NA,NA,NA,NA,1
+"P056",50,"Female","6/6","PL","Le Mature Cataract","Cataract-related","Middle_aged",1,10,1,"Normal_mild",1
+"P057",57,"Female","6/60","6/12","Re Senile Cataract","Cataract-related","Middle_aged",7,3,3,"Moderate",1
+"P058",5,"Male","6/6","6/6","Vkc","Conjunctival/surface disorders","Child",1,1,1,"Normal_mild",0
+"P059",35,"Female","6/6","6/6","Allergy","Conjunctival/surface disorders","Adult",1,1,1,"Normal_mild",0
+"P060",40,"Male","6/6","6/6","Presbyopia","Refractive disorders","Adult",1,1,1,"Normal_mild",0
+"P061",40,"Female","6/6","6/6","Presbyopia","Refractive disorders","Adult",1,1,1,"Normal_mild",0
+"P062",47,"Male","6/6","6/9","Presbyopia","Refractive disorders","Middle_aged",1,2,1,"Normal_mild",0
+"P063",44,"Female","6/9","6/9","Presbyopia","Refractive disorders","Adult",2,2,2,"Normal_mild",0
+"P064",43,"Female","6/6","6/9","Presbyopia","Refractive disorders","Adult",1,2,1,"Normal_mild",0
+"P065",60,"Male","6/12","6/12","Presbyopia","Refractive disorders","Middle_aged",3,3,3,"Moderate",0
+"P066",40,"Female","6/6","6/6","Presbyopia","Refractive disorders","Adult",1,1,1,"Normal_mild",0
+"P067",75,"Male","6/36","6/18","Allergy","Conjunctival/surface disorders","Elderly",6,4,4,"Moderate",1
+"P068",80,"Male","6/18","6/18","Elo","Cataract-related","Elderly",4,4,4,"Moderate",1
+"P069",3,"Male","","","Vkc","Conjunctival/surface disorders","Child",NA,NA,NA,NA,1
+"P070",43,"Female","6/9","6/9","Presbyopia","Refractive disorders","Adult",2,2,2,"Normal_mild",0
+"P071",49,"Male","NPL","6/9","Le Elo","Cataract-related","Middle_aged",11,2,2,"Normal_mild",1
+"P072",60,"Male","6/18","6/18","Presbyopia","Refractive disorders","Middle_aged",4,4,4,"Moderate",1
+"P073",50,"Female","6/9","6/9","Presbyopia","Refractive disorders","Middle_aged",2,2,2,"Normal_mild",0
+"P074",40,"Male","6/9","6/6","Presbyopia","Refractive disorders","Adult",2,1,1,"Normal_mild",0
+"P075",40,"Male","6/9","6/9","Presbyopia","Refractive disorders","Adult",2,2,2,"Normal_mild",0
+"P076",43,"Female","6/12","6/9","Presbyopia","Refractive disorders","Adult",3,2,2,"Normal_mild",0
+"P077",65,"Female","5/60","6/60","Bilateral Matured Senile Cataract","Cataract-related","Elderly",NA,7,7,"Very_poor",1
+"P078",50,"Male","6/36","6/36","Bilateral Elo","Cataract-related","Middle_aged",6,6,6,"Severe",1
+"P079",60,"Male","6/18","6/24","Bilateral Elo","Cataract-related","Middle_aged",4,5,4,"Moderate",1
+"P080",69,"Male","6/60","2/60","Le Mature Cataract","Cataract-related","Elderly",7,NA,7,"Very_poor",1
+"P081",55,"Male","6/24","6/36","Presbyopia","Refractive disorders","Middle_aged",5,6,5,"Severe",1
+"P082",38,"Male","6/6","6/12","Presbyopia","Refractive disorders","Adult",1,3,1,"Normal_mild",0
+"P083",25,"Male","6/6","6/6","Allergy","Conjunctival/surface disorders","Adult",1,1,1,"Normal_mild",0
+"P084",48,"Female","6/18","6/12","Bilateral Elo","Cataract-related","Middle_aged",4,3,3,"Moderate",1
+"P085",44,"Female","6/6","6/6","Presbyopia","Refractive disorders","Adult",1,1,1,"Normal_mild",0
+"P086",47,"Female","6/9","6/9","Elo","Cataract-related","Middle_aged",2,2,2,"Normal_mild",1
+"P087",60,"Male","6/36","6/60","Le Cataract","Cataract-related","Middle_aged",6,7,6,"Severe",1
+"P088",28,"Male","6/6","6/6","Presbyopia","Refractive disorders","Adult",1,1,1,"Normal_mild",0
+"P089",30,"Male","2/60","4/60","Bilateral Mature Senile Cataract","Cataract-related","Adult",NA,NA,NA,NA,1
+"P090",16,"Female","6/9","6/9","Allergy","Conjunctival/surface disorders","Child",2,2,2,"Normal_mild",0
+"P091",28,"Male","6/6","6/6","Allergy","Conjunctival/surface disorders","Adult",1,1,1,"Normal_mild",0
+"P092",37,"Male","6/36","4/60","Allergy","Conjunctival/surface disorders","Adult",6,NA,6,"Severe",1
+"P093",42,"Female","6/9","6/9","Presbyopia","Refractive disorders","Adult",2,2,2,"Normal_mild",0
+"P094",25,"Female","6/9","6/12","Allergy","Conjunctival/surface disorders","Adult",2,3,2,"Normal_mild",0
+"P095",70,"Female","HM","4/60","Bilateral Mature Cataract","Cataract-related","Elderly",10,NA,10,"Very_poor",1
+"P096",25,"Female","6/6","6/6","Allergy","Conjunctival/surface disorders","Adult",1,1,1,"Normal_mild",0
+"P097",4,"Male","","","Vkc","Conjunctival/surface disorders","Child",NA,NA,NA,NA,1
+"P098",9,"Female","6/6","6/6","Vkc","Conjunctival/surface disorders","Child",1,1,1,"Normal_mild",0
+"P099",75,"Male","2/60","HM","Glaucoma","Glaucoma-related","Elderly",NA,10,10,"Very_poor",1
+"P100",39,"Male","6/6","6/9","Bilateral Pingueculae","Others","Adult",1,2,1,"Normal_mild",1
+"P101",50,"Female","6/12","5/60","Le Mature Cataract","Cataract-related","Middle_aged",3,NA,3,"Moderate",1
+"P102",40,"Female","6/9","6/9","Allergy","Conjunctival/surface disorders","Adult",2,2,2,"Normal_mild",0
+"P103",60,"Female","2/60","PL","Le Mature Cataract","Cataract-related","Middle_aged",NA,10,10,"Very_poor",1
+"P104",65,"Female","3/60","6/24","Re Mature Cataract","Cataract-related","Elderly",8,5,5,"Severe",1
+"P105",70,"Female","1/60","2/60","Bilaterla Mature Cataract","Cataract-related","Elderly",9,NA,9,"Very_poor",1
+"P106",60,"Female","6/60","6/24","Re Mature Cataract","Cataract-related","Middle_aged",7,5,5,"Severe",1
+"P107",14,"Female","6/12","6/12","Vkc","Conjunctival/surface disorders","Child",3,3,3,"Moderate",0
+"P108",50,"Male","PL","5/60","Re Mature Cataract","Cataract-related","Middle_aged",10,NA,10,"Very_poor",1
+"P109",10,"Male","6/6","6/6","Allergy","Conjunctival/surface disorders","Child",1,1,1,"Normal_mild",0
+"P110",50,"Female","6/12","6/24","Allergy","Conjunctival/surface disorders","Middle_aged",3,5,3,"Moderate",0
+"P111",4,"Male","","","Allergy","Conjunctival/surface disorders","Child",NA,NA,NA,NA,1
+"P112",38,"Female","6/6","6/6","Presbyopia","Refractive disorders","Adult",1,1,1,"Normal_mild",0
+"P113",65,"Female","HM","HM","Unknown","Others","Elderly",10,10,10,"Very_poor",1
+"P114",25,"Female","6/6","6/6","Allergy","Conjunctival/surface disorders","Adult",1,1,1,"Normal_mild",0
+"P115",35,"Female","6/9","6/9","Allergy","Conjunctival/surface disorders","Adult",2,2,2,"Normal_mild",0
+"P116",51,"Female","6/24","6/12","Bilateral Elo","Cataract-related","Middle_aged",5,3,3,"Moderate",1
+"P117",60,"Female","PL","NLP","Old Corneal Scar","Corneal disorders","Middle_aged",10,11,10,"Very_poor",1
+"P118",18,"Female","1/60","6/6","Re Traumatic Cataract","Cataract-related","Adult",9,1,1,"Normal_mild",1
+"P119",50,"Female","6/9","6/36","Allergy + Elo","Cataract-related","Middle_aged",2,6,2,"Normal_mild",1
+"P120",17,"Male","6/6","6/6","Allergy","Conjunctival/surface disorders","Child",1,1,1,"Normal_mild",0
+"P121",80,"Female","4/60","5/60","Matured Senile Cataract","Cataract-related","Elderly",NA,NA,NA,NA,1
+"P122",70,"Male","6/12","6/36","Presbyopia","Refractive disorders","Elderly",3,6,3,"Moderate",0
+"P123",67,"Female","2/60","6/60","Bilateral Senile Cataract","Cataract-related","Elderly",NA,7,7,"Very_poor",1
+"P124",10,"Male","6/6","6/6","Allergy","Conjunctival/surface disorders","Child",1,1,1,"Normal_mild",0
+"P125",47,"Female","6/6","6/6","Presbyopia","Refractive disorders","Middle_aged",1,1,1,"Normal_mild",0
+"P126",47,"Female","6/6","6/6","Presbyopia","Refractive disorders","Middle_aged",1,1,1,"Normal_mild",0
+"P127",10,"Male","6/6","6/6","Vernal","Others","Child",1,1,1,"Normal_mild",1
+"P128",62,"Male","6/9","6/12","Presbyopia","Refractive disorders","Middle_aged",2,3,2,"Normal_mild",0
+"P129",51,"Male","6/9","6/12","Presbyopia","Refractive disorders","Middle_aged",2,3,2,"Normal_mild",0
+"P130",6,"Male","UNCOOPERATIVE","UNCOOPERATIVE","Vkc","Conjunctival/surface disorders","Child",NA,NA,NA,NA,1
+"P131",30,"Male","6/6","6/6","Presbyopia","Refractive disorders","Adult",1,1,1,"Normal_mild",0
+"P132",18,"Female","6/6","6/6","Allergy","Conjunctival/surface disorders","Adult",1,1,1,"Normal_mild",0
+"P133",14,"Female","6/6","6/6","Refractive Error","Refractive disorders","Child",1,1,1,"Normal_mild",0
+"P134",42,"Female","6/6","6/12","Presbyopia","Refractive disorders","Adult",1,3,1,"Normal_mild",0
+"P135",4,"Male","VKC","","Nan","Others","Child",NA,NA,NA,NA,1
+"P136",27,"Female","6/6","6/6","Allergy","Conjunctival/surface disorders","Adult",1,1,1,"Normal_mild",0
+"P137",55,"Female","6/24","6/9","Presbyopia + Elo","Refractive disorders","Middle_aged",5,2,2,"Normal_mild",0
+"P138",36,"Female","6/6","6/6","Presbyopia","Refractive disorders","Adult",1,1,1,"Normal_mild",0
+"P139",61,"Male","6/6","6/9","Presbyopia","Refractive disorders","Middle_aged",1,2,1,"Normal_mild",0
+"P140",11,"Female","6/6","6/9","Allergy","Conjunctival/surface disorders","Child",1,2,1,"Normal_mild",0
+"P141",30,"Female","6/6","6/6","Allergy","Conjunctival/surface disorders","Adult",1,1,1,"Normal_mild",0
+"P142",36,"Male","6/6","6/6","Allergy","Conjunctival/surface disorders","Adult",1,1,1,"Normal_mild",0
+"P143",58,"Male","6/12","6/6","Allergy + Presbyopia","Refractive disorders","Middle_aged",3,1,1,"Normal_mild",0
+"P144",52,"Female","6/12","6/12","Presbyopia","Refractive disorders","Middle_aged",3,3,3,"Moderate",0
+"P145",70,"Male","6/36","6/36","Bil. Pseudophakia","Others","Elderly",6,6,6,"Severe",1
+"P146",65,"Male","6/9","6/9","Bilateral Elo","Cataract-related","Elderly",2,2,2,"Normal_mild",1
+"P147",13,"Female","6/6","HM","Traumatic Cataract","Cataract-related","Child",1,10,1,"Normal_mild",1
+"P148",29,"Male","3/60","3/60","Glaucoma","Glaucoma-related","Adult",8,8,8,"Very_poor",1
+"P149",58,"Male","6/9","6/9","Presbyopia","Refractive disorders","Middle_aged",2,2,2,"Normal_mild",0
+"P150",30,"Male","6/36","6/36","Myopia","Others","Adult",6,6,6,"Severe",1
+"P151",60,"Male","HM","6/36","Le Elo","Cataract-related","Middle_aged",10,6,6,"Severe",1
+"P152",17,"Female","6/6","6/12","Refractive Error","Refractive disorders","Child",1,3,1,"Normal_mild",0
+"P153",48,"Male","","","Refractive Error","Refractive disorders","Middle_aged",NA,NA,NA,NA,1
+"P154",48,"Female","6/9","6/9","Allergy","Conjunctival/surface disorders","Middle_aged",2,2,2,"Normal_mild",0
+"P155",12,"Male","6/6","6/9","Allergy","Conjunctival/surface disorders","Child",1,2,1,"Normal_mild",0
+"P156",49,"Male","6/6","6/6","Allergy","Conjunctival/surface disorders","Middle_aged",1,1,1,"Normal_mild",0
+"P157",65,"Male","6/12","HM","-","Others","Elderly",3,10,3,"Moderate",1
+"P158",57,"Male","6/24","6/12","Elo","Cataract-related","Middle_aged",5,3,3,"Moderate",1
+"P159",72,"Male","6/12","6/9","Elo","Cataract-related","Elderly",3,2,2,"Normal_mild",1
+"P160",25,"Female","6/24","6/6","Refractive Error","Refractive disorders","Adult",5,1,1,"Normal_mild",0
+"P161",65,"Male","CF","6/60","-","Others","Elderly",9,7,7,"Very_poor",1
+"P162",70,"Male","6/24","6/36","Refractive Error","Refractive disorders","Elderly",5,6,5,"Severe",1
+"P163",55,"Male","6/12","PL","Le Secondary Glaucoma","Glaucoma-related","Middle_aged",3,10,3,"Moderate",1
+"P164",22,"Female","6/36","6/36","Refractive Error","Refractive disorders","Adult",6,6,6,"Severe",1
+"P165",0,"Male","","","Vkc","Conjunctival/surface disorders","Child",NA,NA,NA,NA,1
+"P166",38,"Male","6/6","6/6","Refractive Error","Refractive disorders","Adult",1,1,1,"Normal_mild",0
+"P167",47,"Male","6/6","6/6","Presbyopia","Refractive disorders","Middle_aged",1,1,1,"Normal_mild",0
+"P168",20,"Male","6/9","NPL","Glaucoma","Glaucoma-related","Adult",2,11,2,"Normal_mild",1
+"P169",34,"Male","NPL","6/6","Allergy","Conjunctival/surface disorders","Adult",11,1,1,"Normal_mild",0
+"P170",35,"Male","6/6","6/6","Refractive Error","Refractive disorders","Adult",1,1,1,"Normal_mild",0
+"P171",60,"Female","6/9","6/9","Presbyopia","Refractive disorders","Middle_aged",2,2,2,"Normal_mild",0
+"P172",56,"Male","NPL","6/36","Glaucoma","Glaucoma-related","Middle_aged",11,6,6,"Severe",1
+"P173",70,"Female","6/36","6/36","-","Others","Elderly",6,6,6,"Severe",1
+"P174",40,"Female","6/6","6/18","Le Elo","Cataract-related","Adult",1,4,1,"Normal_mild",1
+"P175",50,"Male","6/18","6/36","Bilateral Immature Cataract","Cataract-related","Middle_aged",4,6,4,"Moderate",1
+"P176",50,"Female","6/9","6/9","Immature Cataract","Cataract-related","Middle_aged",2,2,2,"Normal_mild",1
+"P177",40,"Female","6/6","6/6","Pterygium","Conjunctival/surface disorders","Adult",1,1,1,"Normal_mild",0
+"P178",65,"Male","6/60","6/36","Chronic Dacryocystitis","Others","Elderly",7,6,6,"Severe",1
+"P179",50,"Female","NPL","6/6","Dry Eye","Others","Middle_aged",11,1,1,"Normal_mild",1
+"P180",60,"Female","UNCOOPERATIVE","UNCOOPERATIVE","Cataract","Cataract-related","Middle_aged",NA,NA,NA,NA,1
+"P181",53,"Female","6/6","6/6","Presbyopia","Refractive disorders","Middle_aged",1,1,1,"Normal_mild",0
+"P182",35,"Female","6/6","6/6","Allergy","Conjunctival/surface disorders","Adult",1,1,1,"Normal_mild",0
+"P183",65,"Male","HM","6/24","Cataract","Cataract-related","Elderly",10,5,5,"Severe",1
+"P184",50,"Male","6/60","5/60","Glaucoma","Glaucoma-related","Middle_aged",7,NA,7,"Very_poor",1
+"P185",70,"Female","6/24","6/12","Bilateral Senile Cataract","Cataract-related","Elderly",5,3,3,"Moderate",1
+"P186",40,"Male","6/6","6/6","Presbyopia","Refractive disorders","Adult",1,1,1,"Normal_mild",0
+"P187",50,"Female","6/60","6/36","Cataract","Cataract-related","Middle_aged",7,6,6,"Severe",1
+"P188",70,"Female","","","Cataract Le","Cataract-related","Elderly",NA,NA,NA,NA,1
+"P189",60,"Female","6/60","PL","Cataract","Cataract-related","Middle_aged",7,10,7,"Very_poor",1
+"P190",2,"Male","","","Congenital Cataract","Cataract-related","Child",NA,NA,NA,NA,1
+"P191",55,"Female","6/12","6/36","Elo","Cataract-related","Middle_aged",3,6,3,"Moderate",1
+"P192",77,"Male","6/24","6/60","Cataract","Cataract-related","Elderly",5,7,5,"Severe",1
+"P193",12,"Male","HM","CF @ 2M","Low Vision Cataract","Cataract-related","Child",10,9,9,"Very_poor",1
+"P194",50,"Female","6/9","6/36","Immature Cataract","Cataract-related","Middle_aged",2,6,2,"Normal_mild",1
+"P195",45,"Female","PL","6/9","Le Pterygium","Conjunctival/surface disorders","Middle_aged",10,2,2,"Normal_mild",0
+"P196",50,"Male","6/6","6/9","Others (Refractive)","Refractive disorders","Middle_aged",1,2,1,"Normal_mild",0
+"P197",60,"Female","6/18","6/12","Elo","Cataract-related","Middle_aged",4,3,3,"Moderate",1
+"P198",13,"Male","6/6","6/6","Refractive Error","Refractive disorders","Child",1,1,1,"Normal_mild",0
+"P199",17,"Female","6/6","6/6","Allergy","Conjunctival/surface disorders","Child",1,1,1,"Normal_mild",0
+"P200",55,"Female","6/18","6/18","Presbyopia","Refractive disorders","Middle_aged",4,4,4,"Moderate",1
+"P201",42,"Female","6/6","6/6","Refractive Error","Refractive disorders","Adult",1,1,1,"Normal_mild",0
+"P202",42,"Male","6/6","6/6","Presbyopia","Refractive disorders","Adult",1,1,1,"Normal_mild",0
+"P203",34,"Male","6/36","6/6","Corneal Opacity","Corneal disorders","Adult",6,1,1,"Normal_mild",1
+"P204",25,"Female","PL","HM","Re Anterior Uveitis","Others","Adult",10,10,10,"Very_poor",1
+"P205",18,"Male","6/6","6/6","Allergy","Conjunctival/surface disorders","Adult",1,1,1,"Normal_mild",0
+"P206",23,"Female","6/6","6/6","Allergy","Conjunctival/surface disorders","Adult",1,1,1,"Normal_mild",0
+"P207",40,"Male","6/9","6/9","Allergy","Conjunctival/surface disorders","Adult",2,2,2,"Normal_mild",0
+"P208",32,"Female","6/9","6/9","Allergy","Conjunctival/surface disorders","Adult",2,2,2,"Normal_mild",0
+"P209",35,"Male","6/6","6/9","Allergy","Conjunctival/surface disorders","Adult",1,2,1,"Normal_mild",0
+"P210",22,"Female","PL","6/6","Allergy","Conjunctival/surface disorders","Adult",10,1,1,"Normal_mild",0
+"P211",60,"Male","2/60","6/12","Nan","Others","Middle_aged",NA,3,3,"Moderate",1
+"P212",50,"Female","6/9","HM","Le Mature Cataract","Cataract-related","Middle_aged",2,10,2,"Normal_mild",1
+"P213",70,"Male","6/6","6/9+3","Presbyopia","Refractive disorders","Elderly",1,2,1,"Normal_mild",0
+"P214",40,"Female","CF @ 2M","5/60","Re Cataract","Cataract-related","Adult",9,NA,9,"Very_poor",1
+"P215",40,"Female","6/6","6/6","Presbyopia","Refractive disorders","Adult",1,1,1,"Normal_mild",0
+"P216",70,"Male","6/6","HM","Allergy","Conjunctival/surface disorders","Elderly",1,10,1,"Normal_mild",0
+"P217",70,"Male","6/36","1/60","Re Senile Cataract","Cataract-related","Elderly",6,9,6,"Severe",1
+"P218",40,"Female","6/24","6/36","Glaucoma","Glaucoma-related","Adult",5,6,5,"Severe",1
+"P219",5,"Female","6/6","6/9","Vkc","Conjunctival/surface disorders","Child",1,2,1,"Normal_mild",0
+"P220",60,"Male","6/6","6/24","Presbyopia","Refractive disorders","Middle_aged",1,5,1,"Normal_mild",0
+"P221",1,"Male","","","Vkc","Conjunctival/surface disorders","Child",NA,NA,NA,NA,1
+"P222",50,"Female","6/12","6/18","Bilateral Elo","Cataract-related","Middle_aged",3,4,3,"Moderate",1
+"P223",35,"Female","6/18","6/24","Refractive Error","Refractive disorders","Adult",4,5,4,"Moderate",1
+"P224",40,"Female","6/18","6/12+1","Immature Cataract","Cataract-related","Adult",4,3,3,"Moderate",1
+"P225",40,"Female","6/6","6/6","Pterygium","Conjunctival/surface disorders","Adult",1,1,1,"Normal_mild",0
+"P226",65,"Female","6/6","6/6","Bilateral Cataract","Cataract-related","Elderly",1,1,1,"Normal_mild",1
+"P227",40,"Female","6/6","6/6","Pterygium","Conjunctival/surface disorders","Adult",1,1,1,"Normal_mild",0
+"P228",50,"Male","6/6","6/6","Presbyopia","Refractive disorders","Middle_aged",1,1,1,"Normal_mild",0
+"P229",50,"Male","6/24","6/36","Elo","Cataract-related","Middle_aged",5,6,5,"Severe",1
+"P230",55,"Female","6/36","6/36","Nan","Others","Middle_aged",6,6,6,"Severe",1
+"P231",30,"Female","6/6","6/6","Refractive Error","Refractive disorders","Adult",1,1,1,"Normal_mild",0
+"P232",42,"Male","6/6","6/6","Presbyopia","Refractive disorders","Adult",1,1,1,"Normal_mild",0
+"P233",60,"Male","PL","5/60","Re Cataract","Cataract-related","Middle_aged",10,NA,10,"Very_poor",1
+"P234",30,"Female","6/6","NPL","Allergy","Conjunctival/surface disorders","Adult",1,11,1,"Normal_mild",0
+"P235",65,"Female","6/60","6/60","Bilateral Cataract","Cataract-related","Elderly",7,7,7,"Very_poor",1
+"P236",70,"Female","2/60","HM","Bilateral Cataract","Cataract-related","Elderly",NA,10,10,"Very_poor",1
+"P237",65,"Female","6/9","6/6","Bilateral Pterygia","Others","Elderly",2,1,1,"Normal_mild",1
+"P238",55,"Female","NPL","6/9","Allergy","Conjunctival/surface disorders","Middle_aged",11,2,2,"Normal_mild",0
+"P239",53,"Female","6/9","6/12","Bilateral Elo","Cataract-related","Middle_aged",2,3,2,"Normal_mild",1
+"P240",50,"Female","6/9","6/9","Allergy","Conjunctival/surface disorders","Middle_aged",2,2,2,"Normal_mild",0
+"P241",53,"Female","6/36","6/12","Bilateral Elo","Cataract-related","Middle_aged",6,3,3,"Moderate",1
+"P242",24,"Female","6/6","6/6","Allergy","Conjunctival/surface disorders","Adult",1,1,1,"Normal_mild",0
+"P243",26,"Male","6/6","6/6","Allergy","Conjunctival/surface disorders","Adult",1,1,1,"Normal_mild",0

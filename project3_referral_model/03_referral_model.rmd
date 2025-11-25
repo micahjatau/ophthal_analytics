@@ -1,0 +1,212 @@
+---
+title: "Project 3: Referral Prediction Model"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+# Load required packages and set global options
+library(tidyverse)
+library(rsample)      # train-test split
+library(broom)        # tidy model summaries
+library(yardstick)    # evaluation metrics
+library(pROC)         # ROC curve and AUC
+
+knitr::opts_chunk$set(
+  echo = TRUE,
+  message = FALSE,
+  warning = FALSE
+)
+```
+
+## 1. Introduction
+
+This analysis builds a logistic regression model to predict whether outreach patients meet a predefined referral rule. The model uses only simple screening variables that can be collected quickly in the field:
+
+- age group  
+- sex  
+- better-eye visual acuity category  
+
+The outcome `referral_needed` was constructed in Project 1 using a rule that combines diagnostic category and visual acuity. Here, the goal is to see how well we can approximate that rule using only age and visual acuity information, without diagnosis.
+
+---
+
+## 2. Data import and preprocessing
+
+```{r data-import}
+# Read the cleaned dataset produced in Project 1.
+# Path assumes this Rmd is in project3_referral_model/
+akurba <- readr::read_csv('C:\\Users\\Micah\\Desktop\\R_portfolio_project\\ophthal_analytics\\project1_clean_qc\\data_processed\\akurba_with_referral.csv')
+
+glimpse(akurba)
+```
+
+```{r preprocess}
+# Prepare factors and drop rows with missing values in the variables used.
+akurba <- akurba %>%
+  mutate(
+    # Outcome as factor with 0 = no referral, 1 = referral
+    referral_needed = factor(referral_needed, levels = c(0, 1)),
+
+    # Ensure predictors are factors with stable ordering
+    sex = factor(Sex),
+
+    age_group = factor(
+      age_group,
+      levels = c("Child", "Adult", "Middle_aged", "Elderly")
+    ),
+
+     who_va_cat = factor(
+      who_va_cat,
+      levels = c("Normal", "Mild VI", "Moderate VI", "Severe VI", "Blindness"),
+      ordered = TRUE
+    )
+  ) %>%
+  # Keep only rows with complete data for outcome and predictors
+  drop_na(referral_needed, age_group, sex, who_va_cat)
+
+# Check outcome distribution after cleaning
+table(akurba$referral_needed)
+```
+
+---
+
+## 3. Quick exploration of outcome by predictors
+
+```{r explore-tables}
+# Referral status by age group
+table(akurba$referral_needed, akurba$age_group)
+
+# Referral status by better-eye category
+table(akurba$referral_needed, akurba$who_va_cat)
+```
+
+---
+
+## 4. Train–test split
+
+```{r split}
+set.seed(2025)  # for reproducibility
+
+split <- initial_split(akurba, prop = 0.7, strata = referral_needed)
+
+train_data <- training(split)
+test_data  <- testing(split)
+
+# Check class proportions in each split
+prop.table(table(train_data$referral_needed))
+prop.table(table(test_data$referral_needed))
+```
+
+---
+
+## 5. Logistic regression model
+
+```{r fit-model}
+model_reduced <- glm(
+  referral_needed ~ age_group + sex + who_va_cat,
+  data = train_data,
+  family = binomial
+)
+
+summary(model_reduced)
+```
+
+```{r tidy-coefs}
+model_tidy <- broom::tidy(
+  model_reduced,
+  exponentiate = TRUE,  # report odds ratios
+  conf.int = TRUE       # include confidence intervals
+)
+
+model_tidy
+```
+
+---
+
+## 6. Performance on the held-out test set
+
+### 6.1 Predictions and confusion matrix at 0.5 threshold
+
+```{r predictions}
+test_pred <- test_data %>%
+  mutate(
+    # Predicted probability of referral
+    pred_prob = predict(model_reduced, newdata = test_data, type = "response"),
+
+    # Classify using 0.5 threshold
+    pred_class = if_else(pred_prob >= 0.5, "1", "0"),
+    pred_class = factor(pred_class, levels = c("0", "1"))
+  )
+```
+
+```{r confusion-matrix-0-5}
+conf_mat_0_5 <- yardstick::conf_mat(
+  test_pred,
+  truth = referral_needed,
+  estimate = pred_class
+)
+conf_mat_0_5
+```
+
+```{r metrics-0-5}
+metrics_0_5 <- yardstick::metrics(
+  test_pred,
+  truth = referral_needed,
+  estimate = pred_class
+)
+metrics_0_5
+```
+
+### 6.2 ROC curve and AUC
+
+```{r roc-curve}
+roc_obj <- pROC::roc(
+  response  = as.numeric(test_data$referral_needed) - 1,
+  predictor = test_pred$pred_prob
+)
+
+plot(
+  roc_obj,
+  main = "ROC curve – referral prediction model",
+  print.auc = TRUE
+)
+```
+
+---
+
+## 7. Sensitivity analysis with a lower threshold
+
+```{r threshold-0-3}
+test_pred <- test_pred %>%
+  mutate(
+    pred_class_0_3 = if_else(pred_prob >= 0.3, "1", "0"),
+    pred_class_0_3 = factor(pred_class_0_3, levels = c("0", "1"))
+  )
+
+# Confusion matrix at threshold 0.3
+conf_mat_0_3 <- yardstick::conf_mat(
+  test_pred,
+  truth = referral_needed,
+  estimate = pred_class_0_3
+)
+conf_mat_0_3
+```
+
+```{r metrics-0-3}
+# Metrics at threshold 0.3
+metrics_0_3 <- yardstick::metrics(
+  test_pred,
+  truth = referral_needed,
+  estimate = pred_class_0_3
+)
+metrics_0_3
+```
+
+---
+
+## 8. Limitations and conclusion
+
+- The outcome `referral_needed` is a rule-based label, not a reflection of clinician decision-making.
+- The model cannot capture more subtle or contextual judgement calls made in practice.
+- Visual acuity alone explains most of the variance: categories like "Severe" and "Very_poor" lead to near-complete separation.
+- This analysis demonstrates how far one can get with very simple, low-cost inputs such as age and VA alone.
