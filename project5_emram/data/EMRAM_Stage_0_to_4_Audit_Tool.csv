@@ -1,0 +1,6 @@
+EMRAM Stage,Key Criteria,Hospital Status (Yes/No),Notes / Evidence
+Stage 0,No EMR components installed. All records are paper-based.,No,
+Stage 1,"Basic ancillary systems (lab, radiology, pharmacy) installed.",Yes,"Can be viewed when updated, with some paper based communication "
+Stage 2,Clinical Data Repository (CDR) in place with controlled medical vocabulary.,Yes,icd-9 & icd-10
+Stage 3,"Nursing/clinical documentation implemented; basic CDSS (e.g., drug-allergy alerts).",No,"Nursing/clinical documentation implemented; CDSS features absent, "
+Stage 4,Computerized Physician Order Entry (CPOE) system in place with medication-related CDSS.,No,CPOE implemented without CDSS

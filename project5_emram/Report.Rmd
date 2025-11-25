@@ -1,0 +1,149 @@
+---
+title: "Project 5 – EMRAM Maturity Audit Report (Stages 0 to 4)"
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+    number_sections: true
+---
+
+```{r}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+library(tidyverse)
+library(scales)
+library(ggplot2)
+library(forcats)
+```
+
+
+## Introduction
+
+The Electronic Medical Record Adoption Model (EMRAM) is a staged framework used to assess hospital EMR maturity. Stages 0 to 4 represent foundational phases, from limited digital capability to structured clinical documentation and early clinical integration.
+
+This project applies a checklist based EMRAM audit to a single hospital and documents the workflow in a reproducible R pipeline.
+
+## Methods
+
+### Study design
+
+Descriptive EMRAM maturity assessment using a checklist aligned to HIMSS EMRAM stages 0 to 4.
+Each criterion was rated as implemented (Yes), partially implemented (Partial), or not implemented (No). Evidence fields captured supporting information where available.
+
+### Data source
+
+The dataset is an EMRAM audit export where rows represent criteria and columns store stage, indicator text, response, and evidence.
+
+Scoring and stage assignment
+Responses were mapped:
+
+Yes = 1
+
+Partial = 0.5
+
+No = 0
+
+Stage achievement followed cumulative EMRAM rules. A stage was considered achieved only if all criteria in that stage were fully implemented (score equal to 1). The final EMRAM stage was the highest stage achieved.
+
+Because clinical decision support systems are absent in this setting, CDSS related items were scored as not implemented.
+
+### Analysis
+Analysis steps:
+
+Stage wise summaries of item counts and proportion fully implemented
+
+Domain level summaries based on simple text based domain tagging
+
+Visualizations for stage scores, domain profiles, and item level compliance
+
+All steps were implemented in R with separate R Markdown files for cleaning, scoring, and reporting.
+
+## Results
+
+```{r}
+stage_summary <- read_csv("data/emram_stage_summary.csv")
+domain_summary <- read_csv("data/emram_domain_summary.csv")
+final_stage <- read_csv("data/emram_final_stage.csv")$final_stage[1]
+
+stage_summary
+domain_summary
+final_stage
+```
+
+### Stage completion
+
+```{r}
+stage_plot_df <- stage_summary %>%
+mutate(mean_score = (n_yes + 0.5 * n_partial) / n_items)
+
+ggplot(stage_plot_df, aes(x = factor(stage), y = mean_score)) +
+geom_col() +
+scale_y_continuous(limits = c(0, 1), labels = percent_format(accuracy = 1)) +
+labs(
+title = "Mean EMRAM checklist score by stage",
+x = "Stage",
+y = "Mean score"
+)
+```
+
+
+### Domain maturity profile
+
+```{r}
+ggplot(domain_summary, aes(x = reorder(domain, mean_score), y = mean_score)) +
+geom_col() +
+coord_flip() +
+scale_y_continuous(limits = c(0, 1), labels = percent_format(accuracy = 1)) +
+labs(
+title = "Domain maturity profile",
+x = "Domain",
+y = "Mean score"
+)
+
+```
+
+### Indicator compliance heatmap
+
+```{r}
+emram_clean <- read_csv("data/emram_clean.csv") %>%
+mutate(
+status = case_when(
+score == 1 ~ "Yes",
+score == 0.5 ~ "Partial",
+score == 0 ~ "No",
+TRUE ~ "Missing"
+)
+)
+
+ggplot(emram_clean, aes(
+x = factor(stage),
+y = fct_reorder(indicator, score, .fun = mean, na.rm = TRUE),
+fill = status
+)) +
+geom_tile(color = "white") +
+labs(
+title = "EMRAM indicator compliance heatmap",
+x = "Stage",
+y = "Indicator"
+) +
+theme(axis.text.y = element_text(size = 6))
+
+```
+
+## Discussion
+The hospital has implemented most documentation and CPOE-related capabilities associated with EMRAM Stages 3 and 4, but the absence of clinical decision support means these stages are only partially fulfilled. The formal EMRAM level therefore remains at Stage 2, with Stage 3–4 functions present but incomplete.
+
+Domain level results usually show documentation as one of the strongest areas and decision support as one of the weakest. Interoperability, medication safety, and governance often show partial implementation with mixed scores.
+
+Because EMRAM is cumulative, progress to higher stages depends on closing these gaps, especially for decision support and integrated medication processes.
+
+## Recommendations
+- Prioritise implementation of basic rules based CDSS for allergy, interaction, and guideline prompts.
+
+- Strengthen CPOE and eMAR integration to support safer medication workflows.
+
+- Formalise EMR governance and include regular EMRAM based audits in quality routines.
+
+- Use this baseline as a reference point for future upgrades and budget planning.
+
+## Conclusion
+This EMRAM checklist audit provides a reproducible baseline for EMR maturity across stages 0 to 4. The hospital shows solid documentation capability but remains limited by the absence of decision support and other advanced clinical functions. Targeted investments in CDSS and clinical process integration are required for meaningful movement to higher maturity stages.

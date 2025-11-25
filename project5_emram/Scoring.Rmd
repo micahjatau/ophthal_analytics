@@ -1,0 +1,143 @@
+---
+title: "Project 5 – EMRAM Scoring and Visuals (Stages 0 to 4)"
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+    number_sections: true
+---
+
+```{r}
+knitr::opts_chunk$set(echo = TRUE, warning = FALSE, message = FALSE)
+library(tidyverse)
+library(scales)
+library(ggplot2)
+library(forcats)
+```
+
+## 1. Load cleaned checklist
+
+```{r}
+emram_clean <- read_csv("data/emram_clean.csv")
+glimpse(emram_clean)
+```
+
+## 2. Stage wise completion
+A stage is achieved only if all its criteria have score equal to 1.
+Partial is progress but does not count as full achievement.
+
+```{r}
+stage_summary <- emram_clean %>%
+group_by(stage) %>%
+summarise(
+n_items = n(),
+n_yes = sum(score == 1, na.rm = TRUE),
+n_partial = sum(score == 0.5, na.rm = TRUE),
+n_no = sum(score == 0, na.rm = TRUE),
+pct_yes = n_yes / n_items,
+stage_complete = if_else(n_yes == n_items, 1L, 0L),
+.groups = "drop"
+) %>%
+arrange(stage) %>%
+mutate(pct_yes = percent(pct_yes, accuracy = 0.1))
+
+stage_summary
+
+```
+
+## 3. Final EMRAM stage
+Final stage is highest stage where stage_complete == 1.
+
+```{r}
+achieved_stages <- stage_summary %>%
+filter(stage_complete == 1L) %>%
+pull(stage)
+
+final_stage <- if (length(achieved_stages) == 0) 0 else max(achieved_stages)
+final_stage
+```
+
+4. Domain performance
+
+```{r}
+domain_summary <- emram_clean %>%
+group_by(domain) %>%
+summarise(
+n_items = n(),
+mean_score = mean(score, na.rm = TRUE),
+pct_yes = mean(score == 1, na.rm = TRUE),
+.groups = "drop"
+) %>%
+mutate(pct_yes = percent(pct_yes, accuracy = 0.1)) %>%
+arrange(desc(mean_score))
+
+domain_summary
+```
+
+## 5. Visualizations
+### 5.1 Stage completion bar plot
+
+```{r}
+stage_plot_df <- emram_clean %>%
+group_by(stage) %>%
+summarise(mean_score = mean(score, na.rm = TRUE), .groups = "drop")
+
+ggplot(stage_plot_df, aes(x = factor(stage), y = mean_score)) +
+geom_col() +
+scale_y_continuous(limits = c(0, 1), labels = percent_format(accuracy = 1)) +
+labs(
+title = "Mean EMRAM checklist score by stage",
+x = "Stage",
+y = "Mean score"
+)
+```
+
+### 5.2 Domain profile
+
+```{r}
+ggplot(domain_summary, aes(x = reorder(domain, mean_score), y = mean_score)) +
+geom_col() +
+coord_flip() +
+scale_y_continuous(limits = c(0, 1), labels = percent_format(accuracy = 1)) +
+labs(
+title = "Domain maturity profile",
+x = "Domain",
+y = "Mean score"
+)
+```
+
+### 5.3 Indicator heatmap
+
+```{r}
+heat_df <- emram_clean %>%
+mutate(
+status = case_when(
+score == 1 ~ "Yes",
+score == 0.5 ~ "Partial",
+score == 0 ~ "No",
+TRUE ~ "Missing"
+)
+)
+
+ggplot(heat_df, aes(
+x = factor(stage),
+y = fct_reorder(indicator, score, .fun = mean, na.rm = TRUE),
+fill = status
+)) +
+geom_tile(color = "white") +
+labs(
+title = "EMRAM indicator compliance heatmap",
+x = "Stage",
+y = "Indicator"
+) +
+theme(axis.text.y = element_text(size = 6))
+
+```
+
+### 6. Export summaries
+
+```{r}
+write_csv(stage_summary, "data/emram_stage_summary.csv")
+write_csv(domain_summary, "data/emram_domain_summary.csv")
+write_csv(tibble(final_stage = final_stage), "data/emram_final_stage.csv")
+```

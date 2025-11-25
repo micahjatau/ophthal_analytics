@@ -1,0 +1,6 @@
+stage,indicator,response,evidence,response_clean,score,indicator_lc,domain
+Stage 0,No EMR components installed. All records are paper-based.,No,NA,no,0,no emr components installed. all records are paper-based.,Other
+Stage 1,"Basic ancillary systems (lab, radiology, pharmacy) installed.",Yes,NA,yes,1,"basic ancillary systems (lab, radiology, pharmacy) installed.",Other
+Stage 2,Clinical Data Repository (CDR) in place with controlled medical vocabulary.,Yes,NA,yes,1,clinical data repository (cdr) in place with controlled medical vocabulary.,Other
+Stage 3,"Nursing/clinical documentation implemented; basic CDSS (e.g., drug-allergy alerts).",No,NA,no,0,"nursing/clinical documentation implemented; basic cdss (e.g., drug-allergy alerts).",Documentation
+Stage 4,Computerized Physician Order Entry (CPOE) system in place with medication-related CDSS.,No,NA,no,0,computerized physician order entry (cpoe) system in place with medication-related cdss.,CDSS

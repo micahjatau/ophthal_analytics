@@ -1,0 +1,6 @@
+stage,n_items,n_yes,n_partial,n_no,pct_yes,stage_complete
+Stage 0,1,0,0,1,0.0%,0
+Stage 1,1,1,0,0,100.0%,1
+Stage 2,1,1,0,0,100.0%,1
+Stage 3,1,0,0,1,0.0%,0
+Stage 4,1,0,0,1,0.0%,0
