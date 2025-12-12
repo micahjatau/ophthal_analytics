@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>FUTH Lafia Ophthalmology Data Portfolio</title>
+</head>
+<body>
+
+  <h1>FUTH Lafia Ophthalmology Data Analysis Portfolio</h1>
+  <p>
+    This site showcases real clinical data projects built from ophthalmology service data at the
+    Federal University Teaching Hospital, Lafia. Each project demonstrates practical skills in data
+    cleaning, visual acuity classification, outcomes analysis and digital health maturity
+    assessment using R.
+  </p>
+
+  <hr>
+
+  <h2>Project 1 &ndash; Data Cleaning and WHO Visual Acuity Classification</h2>
+  <p><strong>Goal:</strong> Build a reproducible pipeline for cleaning outreach data and classifying
+    visual acuity using World Health Organization categories for visual impairment.</p>
+  <p><strong>Highlights:</strong></p>
+  <ul>
+    <li>Parsing and normalising visual acuity strings.</li>
+    <li>Custom ranking function for visual acuity.</li>
+    <li>WHO aligned better eye classification.</li>
+    <li>Clean dataset exported for downstream analysis.</li>
+  </ul>
+  <p>
+    <a href="Project1/">View project folder</a>
+  </p>
+
+  <hr>
+
+  <h2>Project 2 &ndash; Prevalence and Pattern of Eye Diseases in Akurba Outreach</h2>
+  <p><strong>Goal:</strong> Estimate the prevalence of visual impairment and describe the pattern of
+    ocular diseases in a rural outreach population.</p>
+  <p><strong>Highlights:</strong></p>
+  <ul>
+    <li>WHO based visual acuity categories.</li>
+    <li>Prevalence estimates by age and sex.</li>
+    <li>Diagnostic group distribution (refractive error, cataract, glaucoma, corneal disease).</li>
+    <li>Narrative report with methods, results and discussion.</li>
+  </ul>
+  <p>
+    <a href="Project2/">View project folder</a><br>
+    <a href="Project2/Report.md">Read the full report</a>
+  </p>
+
+  <hr>
+
+  <h2>Project 3 &ndash; Referral Decision Support from Outreach Data</h2>
+  <p><strong>Goal:</strong> Build a simple referral decision logic using diagnosis categories and
+    visual acuity to flag patients who require further ophthalmic evaluation.</p>
+  <p><strong>Highlights:</strong></p>
+  <ul>
+    <li>Rule based referral flag (<code>referral_needed</code>).</li>
+    <li>Stratified summaries by age, sex and diagnostic category.</li>
+    <li>Basic visualisations of referral burden.</li>
+  </ul>
+  <p>
+    <a href="Project3/">View project folder</a>
+  </p>
+
+  <hr>
+
+  <h2>Project 4 &ndash; Trabeculectomy Outcomes in Glaucoma Patients</h2>
+  <p><strong>Goal:</strong> Evaluate visual acuity stability, intraocular pressure reduction and
+    medication burden after trabeculectomy.</p>
+  <p><strong>Highlights:</strong></p>
+  <ul>
+    <li>Conversion of visual acuity to logMAR.</li>
+    <li>Intraocular pressure changes from baseline to follow up.</li>
+    <li>Complete versus qualified surgical success definitions.</li>
+    <li>Linear mixed models for IOP trajectories.</li>
+    <li>Kaplan&ndash;Meier survival analysis for time to failure.</li>
+  </ul>
+  <p>
+    <a href="Project4/">View project folder</a><br>
+    <a href="Project4/05_trab_outcomes-2.html">Outcomes report</a><br>
+    <a href="Project4/06_trab_survival.html">Survival analysis</a>
+  </p>
+
+  <hr>
+
+  <h2>Project 5 &ndash; EMRAM Digital Maturity Assessment</h2>
+  <p><strong>Goal:</strong> Use the HIMSS EMRAM framework to assess hospital electronic medical
+    record maturity and generate a simple digital maturity profile.</p>
+  <p><strong>Highlights:</strong></p>
+  <ul>
+    <li>Cleaning and standardisation of an EMRAM audit tool.</li>
+    <li>Binary and numeric scoring of indicators.</li>
+    <li>Domain level summary tables.</li>
+    <li>Overall stage assignment and basic visualisations.</li>
+  </ul>
+  <p>
+    <a href="Project5/">View project folder</a>
+  </p>
+
+  <hr>
+
+  <h2>Methods and Tools</h2>
+  <ul>
+    <li>R with tidyverse, janitor, ggplot2, lme4, survival and related packages.</li>
+    <li>RMarkdown for reproducible reporting.</li>
+    <li>Clinical frameworks: WHO visual impairment categories, glaucoma surgery outcome criteria and EMRAM stages.</li>
+  </ul>
+  <p>
+    Data used in these projects is fully anonymised and not intended for public redistribution.
+  </p>
+
+  <hr>
+
+  <h2>About the Author</h2>
+  <p>
+    This portfolio was created by <strong>Dr. Micah Jatau</strong>, Chief Registrar in Ophthalmology
+    at the Federal University Teaching Hospital, Lafia, with a focus on clinical data analysis,
+    digital health and decision support.
+  </p>
+
+</body>
+</html>
