@@ -32,7 +32,7 @@ A typical layout is:
 ```text
 .
 ├── project1_clean_qc
-├── 09_emram_report.Rmd
+├── project2_prevalence_and_patterns
 ├── project3_referral_model
 ├── project4_dashboard
 ├── project5_emram
@@ -59,5 +59,6 @@ Data scientists who want to see realistic examples of messy clinical data cleani
 Recruiters or supervisors who want concrete evidence of end to end analytical workflows rather than isolated code snippets.
 
 ## Limitations
+
 
 These projects use local datasets with modest sample sizes and were designed primarily for skills demonstration and service evaluation. They should not be interpreted as definitive epidemiological estimates for the wider population.
