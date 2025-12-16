@@ -1,0 +1,263 @@
+---
+title: "Project 2 – Prevalence and Pattern of Eye Diseases and Visual Impairment in Akurba Outreach"
+output:
+  html_document:
+    toc: true
+    toc_depth: 2
+---
+
+```{r}
+knitr::opts_chunk$set(
+echo = TRUE,
+warning = FALSE,
+message = FALSE
+)
+
+library(tidyverse)
+library(janitor)
+library(scales)
+library(broom)
+
+```
+
+
+## 1. Data and context
+
+This analysis uses outreach data from Akurba community.
+Each row represents a patient seen during the outreach, with age, sex, presenting VA in each eye, and a clinician-assigned provisional diagnosis.
+
+The goal here is to:
+
+Estimate the prevalence of visual impairment using WHO-aligned categories.
+
+Describe the pattern of eye diseases observed.
+
+Explore how visual impairment varies by age and sex.
+
+## 2. Load cleaned dataset
+
+```{r}
+# Adjust this path/name to match your cleaned file from Project 1
+akurba <- read_csv("data/akurba_with_referral.csv") %>%
+  clean_names()
+
+glimpse(akurba)
+```
+
+Assumptions (adjust if needed):
+
+age = numeric age in years
+
+sex = coded "M"/"F" or similar
+
+better_eye_cat = WHO-based visual acuity category for the better eye
+
+diagnosis_cat = grouped diagnostic category (e.g. "Refractive", "Cataract-related", "Other")
+
+If your column names differ, fix them here once and use those consistently.
+
+```{r}
+akurba <- akurba %>%
+  mutate(
+    sex = case_when(
+      sex %in% c("M", "Male", "male") ~ "Male",
+      sex %in% c("F", "Female", "female") ~ "Female",
+      TRUE ~ NA_character_
+      ),
+    age_group = case_when(
+      age < 18 ~ "0–17",
+      age >= 18 & age < 40 ~ "18–39",
+      age >= 40 & age < 60 ~ "40–59",
+      age >= 60 ~ "60+",
+      TRUE ~ NA_character_
+      ),
+    age_group = factor(age_group, levels = c("0–17", "18–39", "40–59", "60+"))
+    )
+
+akurba %>% count(sex)
+akurba %>% count(age_group)
+```
+
+## 3. WHO visual impairment categories
+We treat better_eye_cat as a factor in the order of increasing severity.
+
+```{r}
+akurba <- akurba %>%
+  mutate(
+    better_eye_cat = fct_relevel(
+      better_eye_cat,
+      c("Normal", "Mild", "Moderate", "Severe", "Blindness")
+      )
+    )
+
+akurba %>% count(better_eye_cat)
+```
+
+Create a binary “any visual impairment” variable (moderate or worse).
+
+```{r}
+akurba <- akurba %>%
+  mutate(
+    vi_any = case_when(
+      better_eye_cat %in% c("Moderate", "Severe", "Blindness") ~ 1L,
+      better_eye_cat %in% c("Normal", "Mild") ~ 0L,
+      TRUE ~ NA_integer_
+      )
+    )
+
+akurba %>% count(vi_any)
+```
+
+## 4. Overall prevalence of visual impairment
+
+```{r}
+vi_overall <- akurba %>%
+  summarise(
+    n = sum(!is.na(vi_any)),
+    n_vi = sum(vi_any == 1L, na.rm = TRUE),
+    prev_vi = n_vi / n) %>%
+  mutate(prev_vi_pct = percent(prev_vi, accuracy = 0.1))
+
+vi_overall
+```
+
+## 5. Visual impairment by age and sex
+
+```{r}
+vi_age_sex <- akurba %>%
+  filter(!is.na(vi_any), !is.na(age_group), !is.na(sex)) %>%
+  group_by(age_group, sex) %>%
+  summarise(
+    n = n(),
+    n_vi = sum(vi_any == 1L),
+    prev_vi = n_vi / n,
+    .groups = "drop"
+    ) %>%
+  mutate(prev_vi_pct = percent(prev_vi, accuracy = 0.1))
+
+vi_age_sex
+```
+
+Visual:
+
+```{r}
+ggplot(vi_age_sex, aes(x = age_group, y = prev_vi, fill = sex)) +
+  geom_col(position = "dodge") +
+  scale_y_continuous(labels = percent_format(accuracy = 1), limits = c(0, 1)) +
+  labs(
+    title = "Prevalence of visual impairment (Moderate or worse) by age group and sex",
+    x = "Age group",
+    y = "Prevalence"
+    )
+```
+
+## 6. Pattern of diagnostic categories
+
+Overall frequency of diagnostic groups:
+
+```{r}
+diag_overall <- akurba %>%
+  count(diagnosis_cat) %>%
+  mutate(
+    prop = n / sum(n),
+    prop_pct = percent(prop, accuracy = 0.1)
+    ) %>%
+  arrange(desc(n))
+
+diag_overall
+```
+
+Plot:
+
+```{r}
+ggplot(diag_overall, aes(x = reorder(diagnosis_cat, n), y = n)) +
+  geom_col() +
+  coord_flip() +
+  labs(
+    title = "Distribution of diagnostic categories – Akurba outreach",
+    x = "Diagnostic category",
+    y = "Number of patients"
+    )
+```
+
+Diagnostic patterns by age group (optional):
+
+```{r}
+diag_age <- akurba %>%
+  filter(!is.na(age_group), !is.na(diagnosis_cat)) %>%
+  count(age_group, diagnosis_cat) %>%
+  group_by(age_group) %>%
+  mutate(
+    prop = n / sum(n),
+    prop_pct = percent(prop, accuracy = 0.1),
+    .groups = "drop"
+    )
+
+diag_age
+```
+
+Plot: 
+
+```{r}
+ggplot(diag_age, aes(x = age_group, y = prop, fill = diagnosis_cat)) +
+  geom_col(position = "fill") +
+  scale_y_continuous(labels = percent_format(accuracy = 1)) +
+  labs(
+    title = "Relative distribution of diagnostic categories by age group",
+    x = "Age group",
+    y = "Proportion"
+    )
+```
+
+## 7. Simple model: predictors of visual impairment
+
+We now fit a basic logistic regression with outcome “any visual impairment” and predictors age and sex. This is not meant to be a publish-ready model, just a demonstration of workflow.
+
+```{r}
+glm_data <- akurba %>%
+  filter(!is.na(vi_any), !is.na(age), !is.na(sex)) %>%
+  mutate(
+    sex = factor(sex),
+    vi_any = as.factor(vi_any)
+    )
+
+summary(glm_data$age)
+table(glm_data$sex)
+```
+
+```{r}
+fit_vi <- glm(
+  vi_any ~ age + sex,
+  data = glm_data,
+  family = binomial
+  )
+
+summary(fit_vi)
+```
+
+Tidy output with odds ratios:
+
+```{r}
+# Get ORs, but skip profile-based CIs to avoid approx() error
+fit_vi_tidy <- broom::tidy(fit_vi, exponentiate = TRUE, conf.int = FALSE)
+
+fit_vi_tidy
+```
+
+You can interpret this along the lines of:
+
+OR per year increase in age
+
+OR for Female vs Male, adjusted for age
+
+## 8. Export summary tables
+
+```{r}
+write_csv(vi_overall, "data/akurba_vi_overall.csv")
+write_csv(vi_age_sex, "data/akurba_vi_by_age_sex.csv")
+write_csv(diag_overall, "data/akurba_diag_overall.csv")
+write_csv(diag_age, "data/akurba_diag_by_age.csv")
+write_csv(fit_vi_tidy, "data/akurba_vi_glm_results.csv")
+
+```
+

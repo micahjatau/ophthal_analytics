@@ -1,0 +1,8 @@
+diagnosis_cat,n,prop,prop_pct
+Cataract-related,72,0.2962962962962963,29.6%
+Conjunctival/surface disorders,71,0.29218106995884774,29.2%
+Refractive disorders,71,0.29218106995884774,29.2%
+Others,16,0.06584362139917696,6.6%
+Glaucoma-related,9,0.037037037037037035,3.7%
+Corneal disorders,3,0.012345679012345678,1.2%
+Trauma-related,1,0.00411522633744856,0.4%
